@@ -1,0 +1,16 @@
+export const colors = {
+  mainBlue: "#40BFFF",
+  hotRed: "#FF4858",
+  iconsRed: "#FF6875",
+  footerBlue: "#BCDDFE",
+  twitterBlue: "#03A9F4",
+  faceboodBlue: "#385C8E",
+  divider: "#F6F7F8",
+  copywrite: "#C1C8CE",
+  priceRed: "#FF4858",
+  buttonBlue: "#40BFFF",
+  iconPink: "#FF6875",
+  titleBlue: "#223263",
+  white: "#fff",
+  textBlack: "#262626",
+};
