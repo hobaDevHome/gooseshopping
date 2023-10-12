@@ -1,6 +1,7 @@
 import React from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import Divider from "@mui/material/Divider";
 
 import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
@@ -14,71 +15,40 @@ import { makeStyles } from "@mui/styles";
 import SearchInput from "../components/SearchInput";
 const useStyles = makeStyles({
   container: {},
-  lefContainer: {
-    displah: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: colors.mainBlue,
-  },
-  rightContainer: {
-    backgroundColor: colors.white,
-  },
-  column: {
-    display: "flex",
-    flexDirection: "column",
-
-    margin: 0,
-    padding: 0,
-    paddingLeft: 10,
-    color: colors.white,
-    width: "80%",
-  },
-
-  image: {
-    width: 400,
-    height: 450,
-    objectFit: "contian",
-    marginTop: -80,
-    position: "absolute",
-    left: 10,
-    top: "30%",
-  },
-  title: {
-    fontSize: 40,
-    textAlign: "left",
-    margin: 0,
-  },
-
-  text: {
-    fontSize: 18,
-    textAlign: "left",
-    margin: 0,
-    marginTop: 20,
-  },
-  shopnow: {
-    fontSize: 16,
-    textAlign: "left",
-    margin: 0,
-    marginTop: 20,
-  },
-  arc: {
-    width: 130,
-    height: 130,
-    borderRadius: 65,
-    backgroundColor: colors.mainBlue,
-    position: "absolute",
-    right: "48%",
-    zIndex: 1,
-  },
-  getintouch: {
+  searchInputContainer: {
     display: "flex",
     flexDirection: "row",
-    alignItems: "self-start",
+    width: "60%",
+
+    borderRadius: 3,
+    borderColor: colors.divider,
+    borderWidth: 2,
+    borderStyle: "solid",
   },
-  contactInfo: {
+  searchButton: {
+    width: 120,
+    height: 40,
     color: colors.white,
-    zIndex: 2,
+    padding: "10px 20px",
+    backgroundColor: colors.darkerBlue,
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    fontSize: 20,
+    borderRadius: 3,
+  },
+  checkoutRow: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    width: "60%",
+  },
+  divider: {
+    width: "60%",
+    height: 3,
+    backgroundColor: colors.divider,
+    marginBottom: 10,
   },
 });
 
@@ -102,27 +72,117 @@ const Contact = () => {
         </Grid>
 
         <Grid item container xs={12} flexDirection="row">
-          <Grid item sm={12} xs={12} md={6}>
-            voutncer line
+          <Grid
+            item
+            xs={12}
+            sm={12}
+            md={6}
+            justifyContent={"flex-start"}
+            alignSelf={"flex-start"}
+          >
+            <div className={classes.searchInputContainer}>
+              <TextField
+                fullWidth
+                placeholder="Voucher code"
+                sx={{
+                  "& .MuiOutlinedInput-notchedOutline": { border: "none" },
+                }}
+              />
+
+              <div className={classes.searchButton}>Search</div>
+            </div>
           </Grid>
-          <Grid item sm={12} xs={12} md={4}>
-            voutncer line
-          </Grid>
-          <Grid item container xs={12} md={4}>
-            <Grid item sm={12}>
-              shopping info line
-            </Grid>
-            <Grid item sm={12}>
-              shopping info line
-            </Grid>
-            <Grid item sm={12}>
-              shopping info line
-            </Grid>
-            <Grid item sm={12}>
-              shopping info line
-            </Grid>
-            <Grid item sm={12}>
-              shopping info line
+
+          <Grid item container xs={12} sm={12} md={6}>
+            <Grid
+              container
+              item
+              xs={12}
+              flexDirection={"column"}
+              alignItems={"end"}
+            >
+              <div className={classes.checkoutRow}>
+                <Typography
+                  variant="body2"
+                  display="block"
+                  gutterBottom
+                  paddingBottom={{ sm: 1, md: 3 }}
+                  sx={{ textAlign: "left" }}
+                >
+                  Subtotal
+                </Typography>
+                <Typography
+                  variant="body2"
+                  display="block"
+                  gutterBottom
+                  paddingBottom={{ sm: 1, md: 3 }}
+                  sx={{ textAlign: "left" }}
+                >
+                  $998
+                </Typography>
+              </div>
+              <div className={classes.checkoutRow}>
+                <Typography
+                  variant="body2"
+                  display="block"
+                  gutterBottom
+                  paddingBottom={{ sm: 1, md: 3 }}
+                  sx={{ textAlign: "left" }}
+                >
+                  Shipping fee
+                </Typography>
+                <Typography
+                  variant="body2"
+                  display="block"
+                  gutterBottom
+                  paddingBottom={{ sm: 1, md: 3 }}
+                  sx={{ textAlign: "left" }}
+                >
+                  $20
+                </Typography>
+              </div>
+              <div className={classes.checkoutRow}>
+                <Typography
+                  variant="body2"
+                  display="block"
+                  gutterBottom
+                  paddingBottom={{ sm: 1, md: 3 }}
+                  sx={{ textAlign: "left" }}
+                >
+                  Coupon
+                </Typography>
+                <Typography
+                  variant="body2"
+                  display="block"
+                  gutterBottom
+                  paddingBottom={{ sm: 1, md: 3 }}
+                  sx={{ textAlign: "left" }}
+                >
+                  No
+                </Typography>
+              </div>
+              <div className={classes.divider}></div>
+              <div className={classes.checkoutRow}>
+                <Typography
+                  variant="h5"
+                  display="block"
+                  gutterBottom
+                  paddingBottom={{ sm: 1, md: 3 }}
+                  sx={{ textAlign: "left" }}
+                >
+                  TOTAL
+                </Typography>
+                <Typography
+                  variant="h5"
+                  display="block"
+                  gutterBottom
+                  paddingBottom={{ sm: 1, md: 3 }}
+                  sx={{ textAlign: "left" }}
+                >
+                  $118
+                </Typography>
+              </div>
+              <div className={classes.searchButton}>Check out</div>
             </Grid>
           </Grid>
         </Grid>

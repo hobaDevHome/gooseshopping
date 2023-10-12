@@ -13,4 +13,5 @@ export const colors = {
   titleBlue: "#223263",
   white: "#fff",
   textBlack: "#262626",
+  darkerBlue: "#33A0FF",
 };
