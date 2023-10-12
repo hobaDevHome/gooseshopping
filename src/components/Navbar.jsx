@@ -55,8 +55,8 @@ function ResponsiveAppBar() {
                 src={Logo}
                 alt=""
                 style={{
-                  width: "140px",
-                  height: "54px",
+                  width: "160px",
+                  height: "70px",
                   objectFit: "contian",
                   display: "block",
                   padding: 10,

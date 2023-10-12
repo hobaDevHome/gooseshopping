@@ -3,29 +3,37 @@ import React from "react";
 import { products } from "../data";
 import FlashSaleProductCard from "./FlashSaleProductCard";
 
-import { makeStyles } from "@mui/styles";
-
-const useStyles = makeStyles({
-  container: {
-    display: "flex",
-    flexDirection: "row",
-    margin: "0px auto",
-
-    justifyContent: "center",
-    alignItems: "center",
-    marginTop: -100,
-    padding: 0,
-  },
-});
+import Grid from "@mui/material/Grid";
 
 const FlashSaleItems = () => {
-  const classes = useStyles();
   return (
-    <div className={classes.container}>
-      {products.slice(0, 3).map((product) => {
-        return <FlashSaleProductCard product={product} key={product.id} />;
-      })}
-    </div>
+    <Grid
+      container
+      xs={12}
+      marginTop={-15}
+      display={"flex"}
+      justifyContent={"center"}
+    >
+      <Grid item container xs={11} justifyContent={"center"} columnSpacing={5}>
+        {products.slice(0, 3).map((product) => {
+          return (
+            <Grid
+              item
+              sm={12}
+              md={4}
+              lg={4}
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <FlashSaleProductCard product={product} key={product.id} />
+            </Grid>
+          );
+        })}
+      </Grid>
+    </Grid>
   );
 };
 

@@ -36,10 +36,13 @@ const useStyles = makeStyles({
   },
 
   image: {
-    width: 500,
-    height: 300,
+    width: 400,
+    height: 450,
     objectFit: "contian",
     marginTop: -80,
+    position: "absolute",
+    left: 10,
+    top: "30%",
   },
   title: {
     fontSize: 40,
@@ -66,6 +69,16 @@ const useStyles = makeStyles({
     backgroundColor: colors.mainBlue,
     position: "absolute",
     right: "48%",
+    zIndex: 1,
+  },
+  getintouch: {
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "self-start",
+  },
+  contactInfo: {
+    color: colors.white,
+    zIndex: 2,
   },
 });
 
@@ -80,7 +93,7 @@ const Contact = () => {
           xs={12}
           padding={0}
           marginTop={10}
-          flexDirection={{ sm: "column-reverse", md: "row" }}
+          flexDirection={{ sm: "column", md: "row" }}
         >
           <Grid
             container
@@ -94,13 +107,59 @@ const Contact = () => {
               className={classes.arc}
               visibility={{ sm: "hidden", md: "visible" }}
             />
-            <div className={classes.column}>
-              <p className={classes.title}>Adidas Men Running Sneakers</p>
-              <p className={classes.text}>
-                Performance and design. Taken right to the edge.
-              </p>
-              <p className={classes.shopnow}>SHOP NOW.</p>
-            </div>
+            <Box visibility={{ sm: "hidden", md: "visible" }}>
+              <img src={callpic} alt="call" className={classes.image} />
+            </Box>
+            <Grid item sm={12} md={7}></Grid>
+            <Grid
+              item
+              sm={12}
+              md={5}
+              flexDirection={"column"}
+              justifyContent={"space-between"}
+              height={"100%"}
+              paddingTop={{ sm: 2, md: 7 }}
+              paddingBottom={{ sm: 2, md: 7 }}
+              className={classes.contactInfo}
+            >
+              <Box
+                padding={1}
+                className={classes.getintouch}
+                marginBottom={{ sm: 1, md: 9 }}
+              >
+                <Typography variant="h4" gutterBottom>
+                  get in touch
+                </Typography>
+              </Box>
+              <Box padding={1}>
+                <Typography
+                  variant="caption"
+                  display="block"
+                  gutterBottom
+                  paddingBottom={{ sm: 1, md: 3 }}
+                  sx={{ textAlign: "left" }}
+                >
+                  contact@e-comm.ng
+                </Typography>
+                <Typography
+                  variant="caption"
+                  display="block"
+                  gutterBottom
+                  paddingBottom={{ sm: 1, md: 4 }}
+                  sx={{ textAlign: "left" }}
+                >
+                  +234 4556 6665 34
+                </Typography>
+                <Typography
+                  variant="caption"
+                  display="block"
+                  gutterBottom
+                  sx={{ textAlign: "left" }}
+                >
+                  20 Prince Hakerem Lekki Phase 1, Lagos.
+                </Typography>
+              </Box>
+            </Grid>
           </Grid>
 
           <Grid

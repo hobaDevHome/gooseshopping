@@ -7,6 +7,8 @@ import { makeStyles } from "@mui/styles";
 const useStyles = makeStyles({
   container: {
     position: "relative",
+    width: 350,
+    height: 350,
   },
   title: {
     fontSize: 20,
@@ -30,6 +32,7 @@ const useStyles = makeStyles({
     objectFit: "cover",
     display: "block",
     borderRadius: 10,
+    position: "relative",
   },
 
   price: {
