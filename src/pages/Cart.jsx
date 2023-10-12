@@ -1,18 +1,14 @@
 import React from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-import Divider from "@mui/material/Divider";
-
 import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
-import Box from "@mui/material/Box";
-import Paper from "@mui/material/Paper";
 import { colors } from "../constants";
+import { cartItems } from "../data";
 import Typography from "@mui/material/Typography";
-import callpic from "../images/call.png";
 
 import { makeStyles } from "@mui/styles";
-import SearchInput from "../components/SearchInput";
+
 const useStyles = makeStyles({
   container: {},
   searchInputContainer: {
@@ -25,11 +21,11 @@ const useStyles = makeStyles({
     borderWidth: 2,
     borderStyle: "solid",
   },
-  searchButton: {
-    width: 120,
-    height: 40,
+  blueButton: {
     color: colors.white,
-    padding: "10px 20px",
+    height: "100%",
+    width: "100%",
+
     backgroundColor: colors.darkerBlue,
     display: "flex",
     flexDirection: "row",
@@ -45,10 +41,43 @@ const useStyles = makeStyles({
     width: "60%",
   },
   divider: {
-    width: "60%",
+    width: "100%",
     height: 3,
     backgroundColor: colors.divider,
     marginBottom: 10,
+  },
+  searchButtonContianer: {
+    width: 120,
+    margin: 0,
+    padding: 0,
+  },
+  deleteButton: {
+    width: 28,
+    height: 28,
+    borderRadius: 14,
+    backgroundColor: colors.ligthPink,
+    color: colors.darkPink,
+    fontWeight: "bold",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  itemImage: {
+    width: 140,
+    height: 100,
+    borderRadius: 3,
+  },
+  quantityContiner: {
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    backgroundColor: colors.divider,
+    borderRadius: 4,
+    width: "50%",
+    fontSize: 16,
+    fontWeight: "bold",
+    padding: "10px 15px",
   },
 });
 
@@ -60,18 +89,66 @@ const Contact = () => {
 
       <Grid container xs={12} marginTop={5}>
         <Grid container item xs={12} padding={1}>
-          <Grid item sm={12}>
-            header
+          <Grid item sm={6}>
+            PRODUCT
           </Grid>
-          <Grid item sm={12}>
-            cart item
+          <Grid item sm={2}>
+            PRICE
           </Grid>
-          <Grid item sm={12}>
-            cart item
+          <Grid item sm={2}>
+            QTY
+          </Grid>
+          <Grid item sm={2}>
+            UNIT PRICE
+          </Grid>
+          <Grid container item xs={12} padding={1} marginTop={2}>
+            <div className={classes.divider} />
           </Grid>
         </Grid>
+        {cartItems.map((item) => {
+          return (
+            <Grid
+              container
+              item
+              xs={12}
+              padding={1}
+              justifyContent={"center"}
+              alignItems={"center"}
+            >
+              <Grid item sm={1}>
+                <div className={classes.deleteButton}>X</div>
+              </Grid>
+              <Grid item sm={1}>
+                <img
+                  src={require(`../images/products/${item.category}/${item.imageSrc[0]}.png`)}
+                  alt="cartitem"
+                  className={classes.itemImage}
+                />
+              </Grid>
+              <Grid item sm={4}>
+                {item.title}
+              </Grid>
+              <Grid item sm={2}>
+                ${item.price * item.quantity}
+              </Grid>
+              <Grid item container sm={2} justifyContent={"center"}>
+                <div className={classes.quantityContiner}>
+                  <div style={{ color: colors.mainBlue, fontSize: 22 }}>-</div>
+                  <div>{item.quantity}</div>
+                  <div style={{ color: colors.mainBlue, fontSize: 22 }}>+</div>
+                </div>
+              </Grid>
+              <Grid item sm={2}>
+                ${item.price}
+              </Grid>
+              <Grid container item xs={12} padding={1} marginTop={2}>
+                <div className={classes.divider} />
+              </Grid>
+            </Grid>
+          );
+        })}
 
-        <Grid item container xs={12} flexDirection="row">
+        <Grid item container xs={12} flexDirection="row" marginTop={3}>
           <Grid
             item
             xs={12}
@@ -88,8 +165,9 @@ const Contact = () => {
                   "& .MuiOutlinedInput-notchedOutline": { border: "none" },
                 }}
               />
-
-              <div className={classes.searchButton}>Search</div>
+              <div className={classes.searchButtonContianer}>
+                <div className={classes.blueButton}>Search</div>
+              </div>
             </div>
           </Grid>
 
@@ -161,7 +239,9 @@ const Contact = () => {
                   No
                 </Typography>
               </div>
-              <div className={classes.divider}></div>
+              <div className={classes.checkoutRow}>
+                <div className={classes.divider} />
+              </div>
               <div className={classes.checkoutRow}>
                 <Typography
                   variant="h5"
@@ -182,7 +262,11 @@ const Contact = () => {
                   $118
                 </Typography>
               </div>
-              <div className={classes.searchButton}>Check out</div>
+              <div className={classes.checkoutRow}>
+                <div className={classes.blueButton} style={{ height: 60 }}>
+                  Check out
+                </div>
+              </div>
             </Grid>
           </Grid>
         </Grid>

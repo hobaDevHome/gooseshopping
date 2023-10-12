@@ -140,3 +140,35 @@ export const products = [
       "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
   },
 ];
+
+export const cartItems = [
+  {
+    id: 1,
+    title: "Nike Air Max 270 React",
+    price: 299.43,
+    imageSrc: ["sn_01"],
+    quantity: 2,
+    category: "sneakers",
+  },
+  {
+    id: 2,
+    title: "Nike Air Max 270 React",
+
+    price: 299.43,
+
+    imageSrc: ["sn_02"],
+    quantity: 5,
+    category: "sneakers",
+  },
+  {
+    id: 7,
+    title: "FS - QUILTED MAXI CROSS BAG",
+
+    price: 299.43,
+
+    category: "bags",
+    imageSrc: ["bg_03"],
+
+    quantity: 1,
+  },
+];
