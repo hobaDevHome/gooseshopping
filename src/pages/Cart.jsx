@@ -105,7 +105,10 @@ const Contact = () => {
           <Grid item sm={12} xs={12} md={6}>
             voutncer line
           </Grid>
-          <Grid item container xs={12} md={6}>
+          <Grid item sm={12} xs={12} md={4}>
+            voutncer line
+          </Grid>
+          <Grid item container xs={12} md={4}>
             <Grid item sm={12}>
               shopping info line
             </Grid>

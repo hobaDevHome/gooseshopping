@@ -7,7 +7,7 @@ import Grid from "@mui/material/Grid";
 import Filters from "../components/Filters";
 import ProductsList from "../components/ProductsList";
 
-const Category = ({ category }) => {
+const Category = ({ category = "sneakers" }) => {
   return (
     <div>
       <Navbar />

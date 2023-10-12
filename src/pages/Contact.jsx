@@ -27,7 +27,6 @@ const useStyles = makeStyles({
   column: {
     display: "flex",
     flexDirection: "column",
-
     margin: 0,
     padding: 0,
     paddingLeft: 10,
@@ -39,10 +38,6 @@ const useStyles = makeStyles({
     width: 400,
     height: 450,
     objectFit: "contian",
-    marginTop: -80,
-    position: "absolute",
-    left: 10,
-    top: "30%",
   },
   title: {
     fontSize: 40,
@@ -80,6 +75,14 @@ const useStyles = makeStyles({
     color: colors.white,
     zIndex: 2,
   },
+  imgdiv: {
+    position: "absolute",
+    right: "48%",
+    zIndex: 1,
+
+    left: -400,
+    top: "10%",
+  },
 });
 
 const Contact = () => {
@@ -94,6 +97,7 @@ const Contact = () => {
           padding={0}
           marginTop={10}
           flexDirection={{ sm: "column", md: "row" }}
+          sx={{ position: "relative" }}
         >
           <Grid
             container
@@ -107,7 +111,10 @@ const Contact = () => {
               className={classes.arc}
               visibility={{ sm: "hidden", md: "visible" }}
             />
-            <Box visibility={{ sm: "hidden", md: "visible" }}>
+            <Box
+              visibility={{ xs: "hidden", sm: "hidden", md: "visible" }}
+              className={classes.imgdiv}
+            >
               <img src={callpic} alt="call" className={classes.image} />
             </Box>
             <Grid item sm={12} md={7}></Grid>

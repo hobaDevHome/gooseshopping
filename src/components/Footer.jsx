@@ -64,6 +64,7 @@ const useStyles = makeStyles({
   copywrite: {
     color: colors.copywrite,
     fontSize: 14,
+    paddingLeft: 10,
   },
 });
 
@@ -280,17 +281,18 @@ const Footer = () => {
           </div>
         </Grid>
       </Grid>
-
-      <Divider
-        flexItem
-        sx={{
-          marginLeft: "5%",
-          marginRight: "5%",
-          marginTop: 5,
-          height: 5,
-          backgroundColor: colors.white,
-        }}
-      />
+      <Grid item xs={12}>
+        <Divider
+          flexItem
+          sx={{
+            marginLeft: "5%",
+            marginRight: "5%",
+            marginTop: 5,
+            height: 1.2,
+            backgroundColor: colors.white,
+          }}
+        />
+      </Grid>
       <Grid item xs={12}>
         <div className={classes.cardsContainer}>
           <img src={cards} alt="" className={classes.cards} />
