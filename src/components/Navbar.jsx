@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useState, useEffect } from "react";
 import AppBar from "@mui/material/AppBar";
 
 import Box from "@mui/material/Box";
@@ -19,11 +20,21 @@ import { colors } from "../constants";
 import Logo from "../images/goos_logo.png";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 
-const pages = ["Home", "Bags", "Sneakers", "Belts", "Contact Us"];
+const pages = ["Home", "Bags", "Sneakers", "Belts", "Contact"];
 
-function ResponsiveAppBar() {
-  const [anchorElNav, setAnchorElNav] = React.useState(null);
+function ResponsiveAppBar({ active }) {
+  const [selected, setselected] = useState(0);
 
+  const [anchorElNav, setAnchorElNav] = useState(null);
+  useEffect(() => {
+    if (active) {
+      setselected(pages.findIndex((e) => e === active));
+    } else {
+      setselected(-1);
+    }
+  }, [active]);
+
+  console.log("selected", selected);
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
@@ -45,7 +56,7 @@ function ResponsiveAppBar() {
         <Grid
           container
           alignItems="center"
-          display={{ xs: "none", md: "flex" }}
+          display={{ xs: "none", sm: "none", md: "flex" }}
           direction="row"
           justifyContent="space-between"
         >
@@ -57,7 +68,7 @@ function ResponsiveAppBar() {
                 style={{
                   width: "160px",
                   height: "70px",
-                  objectFit: "contian",
+                  objectFit: "contain",
                   display: "block",
                   padding: 10,
                 }}
@@ -76,49 +87,53 @@ function ResponsiveAppBar() {
                 alignItems: "center",
               }}
             >
-              {pages.map((page) => (
-                <Button
-                  key={page}
-                  onClick={handleCloseNavMenu}
-                  sx={{
-                    my: 2,
-                    color: colors.textBlack,
-                    display: "block",
-                    marginLeft: 5,
-                    fontWeight: "bold",
-                  }}
+              {pages.map((page, index) => (
+                <Link
+                  to={page === "Home" ? "/" : `/${page}`}
+                  key={index}
+                  style={{ textDecoration: "none" }}
                 >
-                  {page}
-                </Button>
+                  <Button
+                    onClick={handleCloseNavMenu}
+                    sx={{
+                      my: 2,
+                      color: `${
+                        selected === index ? colors.mainBlue : colors.textBlack
+                      }`,
+                      display: "block",
+                      marginLeft: 5,
+                      fontWeight: "bold",
+                    }}
+                  >
+                    {page}
+                  </Button>
+                </Link>
               ))}
-              <ShoppingCartOutlinedIcon
-                style={{ color: colors.textBlack, marginLeft: 5 }}
-              />
+              <Link to="/Cart">
+                <ShoppingCartOutlinedIcon
+                  style={{ color: colors.textBlack, marginLeft: 5 }}
+                />
+              </Link>
             </Box>
           </Grid>
         </Grid>
-
         <Grid
           container
+          display={{ xs: "flex", sm: "flex", md: "none" }}
+          direction={"row"}
+          justifyContent="space-between"
           alignItems="center"
-          justifyContent="center"
-          display={{ xs: "flex", md: "none" }}
-          sx={12}
-          direction="row"
-          xs={{
-            flexDirection: "row",
-          }}
         >
-          <Box sx={{ flexGrow: 1 }}>
+          <div>
             <IconButton
               size="large"
               aria-label="account of current user"
               aria-controls="menu-appbar"
               aria-haspopup="true"
               onClick={handleOpenNavMenu}
-              color="inherit"
+              color="primary"
             >
-              <MenuIcon />
+              <MenuIcon sx={{ color: "black" }} />
             </IconButton>
             <Menu
               id="menu-appbar"
@@ -138,33 +153,33 @@ function ResponsiveAppBar() {
                 display: { xs: "block", md: "none" },
               }}
             >
-              {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
-                </MenuItem>
+              {pages.map((page, index) => (
+                <Link
+                  to={page === "Home" ? "/" : `/${page}`}
+                  key={index}
+                  style={{ textDecoration: "none" }}
+                >
+                  <MenuItem key={page} onClick={handleCloseNavMenu}>
+                    <Typography textAlign="center">{page}</Typography>
+                  </MenuItem>
+                </Link>
               ))}
             </Menu>
-          </Box>
+          </div>
 
-          <Typography
-            variant="h5"
-            noWrap
-            component="a"
-            href=""
-            sx={{
-              mr: 2,
-              display: { xs: "flex", md: "none" },
-              flexGrow: 1,
-              fontFamily: "Fraunces",
-              fontWeight: 900,
-              fontSize: 30,
-              letterSpacing: ".3rem",
-              color: "white",
-              textDecoration: "none",
-            }}
-          >
-            ShowTime
-          </Typography>
+          <Link to="/">
+            <img
+              src={Logo}
+              alt=""
+              style={{
+                width: "160px",
+                height: "70px",
+                objectFit: "contain",
+                display: "block",
+                padding: 10,
+              }}
+            />
+          </Link>
         </Grid>
       </Toolbar>
     </AppBar>

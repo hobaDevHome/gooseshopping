@@ -1,7 +1,7 @@
 import React from "react";
 import Grid from "@mui/material/Grid";
 import Pagination from "@mui/material/Pagination";
-
+import { Link } from "react-router-dom";
 import { colors } from "../constants";
 
 import { makeStyles } from "@mui/styles";
@@ -38,7 +38,9 @@ const ProductsList = ({ productsList }) => {
         {productsList.map((product) => {
           return (
             <Grid item xs={12} md={6} lg={4} padding={1} key={product.id}>
-              <ProductCard product={product} />
+              <Link to={`/products/${product.id}`}>
+                <ProductCard product={product} />
+              </Link>
             </Grid>
           );
         })}

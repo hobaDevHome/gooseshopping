@@ -1,6 +1,6 @@
 import React from "react";
 import Grid from "@mui/material/Grid";
-
+import { Link } from "react-router-dom";
 import { makeStyles } from "@mui/styles";
 import ProductCard from "./ProductCard";
 
@@ -33,7 +33,9 @@ const ProductSection = ({ title, list }) => {
         {list.map((product) => {
           return (
             <Grid item xs={12} md={4} lg={3} padding={1} key={product.id}>
-              <ProductCard product={product} />
+              <Link to={`/products/${product.id}`}>
+                <ProductCard product={product} />
+              </Link>
             </Grid>
           );
         })}

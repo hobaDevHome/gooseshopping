@@ -89,7 +89,7 @@ const Contact = () => {
   const classes = useStyles();
   return (
     <div>
-      <Navbar />
+      <Navbar active="Contact" />
       <Paper elevation={3} padding={0}>
         <Grid
           container

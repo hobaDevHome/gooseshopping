@@ -15,7 +15,7 @@ const Category = ({ category }) => {
 
   return (
     <div>
-      <Navbar />
+      <Navbar active={`${category[0].toUpperCase() + category.slice(1)}`} />
       <Grid container xs={12} marginTop={10}>
         <Grid container item xs={3}>
           <Filters />

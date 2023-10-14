@@ -7,13 +7,12 @@ import Tab from "@mui/material/Tab";
 import TabContext from "@mui/lab/TabContext";
 import TabList from "@mui/lab/TabList";
 import TabPanel from "@mui/lab/TabPanel";
-import TextField from "@mui/material/TextField";
-import Button from "@mui/material/Button";
+
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import { colors } from "../constants";
 import { products } from "../data";
 import { useParams } from "react-router-dom";
-import Typography from "@mui/material/Typography";
+
 import Rating from "@mui/material/Rating";
 
 import InputLabel from "@mui/material/InputLabel";
@@ -170,7 +169,12 @@ const ProductDetails = () => {
 
   return (
     <div>
-      <Navbar />
+      <Navbar
+        active={
+          currentProduct.category[0].toUpperCase() +
+          currentProduct.category.slice(1)
+        }
+      />
 
       <Grid container xs={12} marginTop={5}>
         <Grid item container xs={12} marginTop={1} marginBottom={4}>

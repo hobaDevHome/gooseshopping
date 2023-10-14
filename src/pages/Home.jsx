@@ -13,7 +13,7 @@ import { products } from "../data";
 const Home = () => {
   return (
     <div>
-      <Navbar />
+      <Navbar active="Home" />
       <Hero />
       <FlashSaleItems />
       <ProductSection title="Best Seller" list={products} />

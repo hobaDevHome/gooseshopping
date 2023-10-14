@@ -38,11 +38,11 @@ const useStyles = makeStyles({
     flexWrap: "wrap",
   },
   colorButton: {
-    width: 28,
-    height: 28,
-    borderRadius: 14,
-    marginRight: 15,
-    marginTop: 10,
+    "width": 28,
+    "height": 28,
+    "borderRadius": 14,
+    "marginRight": 15,
+    "marginTop": 10,
     "&:hover": {
       border: "1px solid green",
       cursor: "pointer",

@@ -21,7 +21,7 @@ function App() {
         <Route path="/Belts" element={<Category category="belts" />} />
         <Route path="/Sneakers" element={<Category category="sneakers" />} />
         <Route path="/cart" element={<Cart />} />
-        <Route path="/contact" element={<Contact />} />
+        <Route path="/Contact" element={<Contact />} />
         <Route path="/products/:id" element={<ProductDetails />} />
       </Routes>
     </div>
