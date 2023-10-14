@@ -16,4 +16,5 @@ export const colors = {
   darkerBlue: "#33A0FF",
   ligthPink: "#fff7f8",
   darkPink: "#FF4252",
+  cartBlue: "#ebf6ff",
 };

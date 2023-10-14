@@ -5,9 +5,10 @@ import Featured from "../components/Featured";
 import LatestNews from "../components/LatestNews";
 import Perks from "../components/Perks";
 import HomeAdd from "../components/HomeAdd";
-import BestSeller from "../components/BestSeller";
+import ProductSection from "../components/ProductSection";
 import Hero from "../components/Hero";
 import FlashSaleItems from "../components/FlashSaleItems";
+import { products } from "../data";
 
 const Home = () => {
   return (
@@ -15,7 +16,7 @@ const Home = () => {
       <Navbar />
       <Hero />
       <FlashSaleItems />
-      <BestSeller />
+      <ProductSection title="Best Seller" list={products} />
       <HomeAdd />
       <Perks />
       <LatestNews />

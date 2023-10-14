@@ -2,12 +2,17 @@ import React from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import HomeAdd from "../components/HomeAdd";
+import { products } from "../data";
 
 import Grid from "@mui/material/Grid";
 import Filters from "../components/Filters";
 import ProductsList from "../components/ProductsList";
 
-const Category = ({ category = "sneakers" }) => {
+const Category = ({ category }) => {
+  const filteredPrdocuts = products.filter(
+    (item) => item.category === category
+  );
+
   return (
     <div>
       <Navbar />
@@ -17,7 +22,9 @@ const Category = ({ category = "sneakers" }) => {
         </Grid>
         <Grid container item xs={9}>
           <HomeAdd />
-          <ProductsList category={category} />
+          {filteredPrdocuts.length > 0 && (
+            <ProductsList productsList={filteredPrdocuts} />
+          )}
         </Grid>
       </Grid>
       <Footer />

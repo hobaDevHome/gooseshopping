@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import Home from "./pages/Home";
 import Bags from "./pages/Bags";
@@ -16,12 +16,12 @@ function App() {
     <div className="App">
       <Routes>
         <Route index element={<Home />} />
-        <Route path="/cat" exact element={<Category />} />
-        <Route path="/Bags" exact element={<Bags />} />
-        <Route path="/Belts" exact element={<Belts />} />
-        <Route path="/Sneakers" exact element={<Sneakers />} />
-        <Route path="/cart" exact element={<Cart />} />
-        <Route path="/contact" exact element={<Contact />} />
+
+        <Route path="/Bags" element={<Category category="bags" />} />
+        <Route path="/Belts" element={<Category category="belts" />} />
+        <Route path="/Sneakers" element={<Category category="sneakers" />} />
+        <Route path="/cart" element={<Cart />} />
+        <Route path="/contact" element={<Contact />} />
         <Route path="/products/:id" element={<ProductDetails />} />
       </Routes>
     </div>

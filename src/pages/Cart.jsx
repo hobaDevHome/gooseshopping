@@ -81,7 +81,7 @@ const useStyles = makeStyles({
   },
 });
 
-const Contact = () => {
+const Cart = () => {
   const classes = useStyles();
   return (
     <div>
@@ -277,4 +277,4 @@ const Contact = () => {
   );
 };
 
-export default Contact;
+export default Cart;

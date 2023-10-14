@@ -133,7 +133,17 @@ export const products = [
     hot: false,
     discount: 0,
     category: "bags",
-    imageSrc: ["bg_03", "bg_02", "bg_01"],
+    imageSrc: [
+      "bg_03",
+      "bg_02",
+      "bg_01",
+      "bg_03",
+      "bg_02",
+      "bg_01",
+      "bg_03",
+      "bg_02",
+      "bg_01",
+    ],
     color: "black",
     brand: "nike",
     description:

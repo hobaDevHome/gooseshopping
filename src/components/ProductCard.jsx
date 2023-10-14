@@ -15,6 +15,11 @@ const useStyles = makeStyles({
     fontWeight: "bold",
     color: colors.titleBlue,
     marginBottom: 15,
+    width: "80%",
+    alignSelf: "center",
+    whiteSpace: "nowrap",
+    overflow: "hidden",
+    textOverflow: "ellipsis",
   },
   image: {
     width: 100,
@@ -31,7 +36,7 @@ const useStyles = makeStyles({
   },
 
   price: {
-    fontSize: 24,
+    fontSize: 18,
     color: colors.mainBlue,
     fontWeight: "bold",
     padding: 0,

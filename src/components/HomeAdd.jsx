@@ -10,6 +10,7 @@ const useStyles = makeStyles({
   container: {
     backgroundColor: colors.mainBlue,
     marginTop: 60,
+    maxHeight: 350,
   },
   lefContainer: {
     displah: "flex",
@@ -31,7 +32,7 @@ const useStyles = makeStyles({
   image: {
     width: 500,
     height: 300,
-    objectFit: "contian",
+    objectFit: "contain",
     marginTop: -80,
   },
   title: {
