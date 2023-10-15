@@ -2,6 +2,7 @@ import React from "react";
 import Grid from "@mui/material/Grid";
 import Link from "@mui/material/Link";
 import Typography from "@mui/material/Typography";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 import { colors } from "../constants";
 
@@ -11,6 +12,7 @@ const useStyles = makeStyles({
   column: {
     marginTop: 60,
     marginRight: 30,
+    width: "100%",
   },
   title: {
     fontSize: 35,
@@ -22,7 +24,7 @@ const useStyles = makeStyles({
     justifyContent: "space-between",
     width: "100%",
     paddingTop: 20,
-    // border: "1px solid red",
+    cursor: "pointer",
   },
   fliterBox: {
     backgroundColor: colors.divider,
@@ -30,7 +32,6 @@ const useStyles = makeStyles({
     display: "flex",
     flexDirection: "column",
     alignItems: "start",
-    width: "100%",
   },
   colorsDiv: {
     display: "flex",
@@ -48,17 +49,37 @@ const useStyles = makeStyles({
       cursor: "pointer",
     },
   },
+  clear: {
+    backgroundColor: colors.darkerBlue,
+    borderRadius: 8,
+    display: "flex",
+    flexDirection: "row",
+    marginBottom: 10,
+    alignItems: "center",
+    cursor: "pointer",
+    color: colors.white,
+  },
 });
 
-const Filters = ({ products }) => {
+const Filters = ({ products, filterProducts }) => {
   const classes = useStyles();
+
+  const onItemCLicked = (item, value) => {
+    filterProducts(item, value);
+  };
+
+  const clearFilters = () => {
+    let item = "";
+    let value = "";
+    filterProducts(item, value);
+  };
 
   const getFilterNames = (factor) => {
     let categories = products.map((e) => e[factor]);
     categories = categories.filter(
       (e, index) => categories.indexOf(e) === index
     );
-    categories = categories.map((e) => e[0].toUpperCase() + e.slice(1));
+
     return categories;
   };
 
@@ -67,21 +88,37 @@ const Filters = ({ products }) => {
 
   return (
     <div className={classes.column}>
+      <div onClick={clearFilters} className={classes.clear}>
+        <DeleteIcon style={{ marginRight: 10, marginLeft: 10 }} />
+        <p>Clear filters</p>
+      </div>
       {brands.length > 0 && (
-        <FitlesBox list={brands} title="Brand" products={products} />
+        <FitlesBox
+          list={brands}
+          title="Brand"
+          products={products}
+          onItemCLicked={onItemCLicked}
+        />
       )}
       {colros.length > 0 && (
-        <FitlesBox list={colros} title="Color" products={products} />
+        <FitlesBox
+          list={colros}
+          title="Color"
+          products={products}
+          onItemCLicked={onItemCLicked}
+        />
       )}
-
-      <div></div>
     </div>
   );
 };
 
 export default Filters;
 
-const FitlesBox = ({ list, title, products }) => {
+const FitlesBox = ({ list, title, products, onItemCLicked }) => {
+  const onSelected = (item, value) => {
+    onItemCLicked(item, value);
+  };
+
   const classes = useStyles();
   return (
     <Grid
@@ -103,6 +140,7 @@ const FitlesBox = ({ list, title, products }) => {
               <div
                 className={classes.colorButton}
                 style={{ backgroundColor: e }}
+                onClick={() => onSelected("color", e)}
               ></div>
             );
           })}
@@ -110,18 +148,20 @@ const FitlesBox = ({ list, title, products }) => {
       ) : (
         <>
           {list.map((item) => {
-            let selectedFitler = products.filter(
-              (e) => e[title.toLowerCase()] === item.toLowerCase()
-            );
+            let selectedFitler = products.filter((e) => e.brand === item);
 
             return (
               <Link
-                href="#"
                 underline="none"
                 sx={{ fontSize: 24 }}
                 className={classes.listItem}
               >
-                <div>{item}</div>
+                <div
+                  style={{ cursor: "pointer" }}
+                  onClick={() => onSelected("brand", item)}
+                >
+                  {item}
+                </div>
                 <div>{selectedFitler.length}</div>
               </Link>
             );

@@ -34,7 +34,6 @@ function ResponsiveAppBar({ active }) {
     }
   }, [active]);
 
-  console.log("selected", selected);
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
