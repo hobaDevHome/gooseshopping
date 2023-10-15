@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import Grid from "@mui/material/Grid";
 import Pagination from "@mui/material/Pagination";
 import { Link } from "react-router-dom";
 import { colors } from "../constants";
+import usePagination from "../Pagination";
 
 import { makeStyles } from "@mui/styles";
 import ProductCard from "./ProductCard";
@@ -31,11 +32,21 @@ const useStyles = makeStyles({
 
 const ProductsList = ({ productsList }) => {
   const classes = useStyles();
+  let [page, setPage] = useState(1);
+  const PER_PAGE = 6;
+
+  const count = Math.ceil(productsList.length / PER_PAGE);
+  const _DATA = usePagination(productsList, PER_PAGE);
+
+  const handleChange = (e, p) => {
+    setPage(p);
+    _DATA.jump(p);
+  };
 
   return (
     <Grid container item xs={12} marginTop={7}>
       <Grid container item xs={12}>
-        {productsList.map((product) => {
+        {_DATA.currentData().map((product) => {
           return (
             <Grid item xs={12} md={6} lg={4} padding={1} key={product.id}>
               <Link
@@ -56,7 +67,7 @@ const ProductsList = ({ productsList }) => {
         marginTop={1}
         className={classes.paginationDiv}
       >
-        <Pagination count={10} color="primary" />
+        <Pagination count={count} color="secondary" onChange={handleChange} />
       </Grid>
     </Grid>
   );

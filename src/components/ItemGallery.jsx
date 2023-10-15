@@ -74,6 +74,7 @@ const ItemGallery = ({ imagesList, category, title }) => {
         {mapped.map((e, index) => {
           return (
             <div
+              key={index}
               ref={ref}
               onClick={() => setActiveThumb(index)}
               onMouseEnter={() => (activeThumb === index ? null : addHover())}

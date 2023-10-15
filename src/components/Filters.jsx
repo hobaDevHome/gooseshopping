@@ -130,14 +130,15 @@ const FitlesBox = ({ list, title, products, onItemCLicked }) => {
       flexDirection={"column"}
       alignItems={"start"}
     >
-      <Typography variant="h5" gutterBottom sx={{ textTransform: "uppercase" }}>
+      <Typography variant="h6" gutterBottom sx={{ textTransform: "uppercase" }}>
         {title}
       </Typography>
       {title === "Color" ? (
         <div className={classes.colorsDiv}>
-          {list.map((e) => {
+          {list.map((e, index) => {
             return (
               <div
+                key={index}
                 className={classes.colorButton}
                 style={{ backgroundColor: e }}
                 onClick={() => onSelected("color", e)}
@@ -147,13 +148,14 @@ const FitlesBox = ({ list, title, products, onItemCLicked }) => {
         </div>
       ) : (
         <>
-          {list.map((item) => {
+          {list.map((item, index) => {
             let selectedFitler = products.filter((e) => e.brand === item);
 
             return (
               <Link
+                key={index}
                 underline="none"
-                sx={{ fontSize: 24 }}
+                sx={{ fontSize: 20 }}
                 className={classes.listItem}
               >
                 <div

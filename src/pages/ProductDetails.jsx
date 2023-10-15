@@ -267,9 +267,10 @@ const ProductDetails = () => {
             >
               <p>Select Color:</p>
               <div className={classes.colorsDiv}>
-                {colorsList.map((e) => {
+                {colorsList.map((e, index) => {
                   return (
                     <div
+                      key={index}
                       className={classes.colorButton}
                       style={{ backgroundColor: e }}
                     ></div>

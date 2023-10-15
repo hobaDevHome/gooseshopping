@@ -108,6 +108,7 @@ const Cart = () => {
         {cartItems.map((item) => {
           return (
             <Grid
+              key={item.id}
               container
               item
               xs={12}

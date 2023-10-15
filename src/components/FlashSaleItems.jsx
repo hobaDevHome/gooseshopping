@@ -27,6 +27,7 @@ const FlashSaleItems = ({ products }) => {
                 justifyContent: "center",
                 alignItems: "center",
               }}
+              key={product.id}
             >
               <Link to={`/products/${product.id}`}>
                 <FlashSaleProductCard product={product} key={product.id} />
