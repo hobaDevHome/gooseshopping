@@ -1,6 +1,6 @@
 import React from "react";
 import Grid from "@mui/material/Grid";
-import background from "../images/hero.png";
+import background from "../images/hero1.jpg";
 
 import { colors } from "../constants";
 
