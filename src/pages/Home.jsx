@@ -15,6 +15,7 @@ const Home = ({ products }) => {
       <Navbar active="Home" />
       <Hero />
       <FlashSaleItems products={products.slice(0, 3)} />
+
       <ProductSection title="Best Seller" list={products.slice(5, 9)} />
       <HomeAdd />
       <Perks />

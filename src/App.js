@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React from "react";
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
@@ -5,11 +6,32 @@ import Home from "./pages/Home";
 import Contact from "./pages/Contact";
 import Cart from "./pages/Cart";
 import { products } from "./data/data";
+import { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  fetchProducts,
+  selectProducts,
+  selectStatus,
+  selectError,
+} from "./redux/slice/productsSlice";
 
 import ProductDetails from "./pages/ProductDetails";
 import Category from "./pages/Category";
 
 function App() {
+  const dispatch = useDispatch();
+  const productsList = useSelector(selectProducts);
+  const status = useSelector(selectStatus);
+  const error = useSelector(selectError);
+
+  useEffect(() => {
+    dispatch(fetchProducts());
+  }, [dispatch]);
+
+  console.log("productsList", productsList);
+  console.log("status", status);
+  console.log("error", error);
+
   return (
     <div className="App">
       <Routes>
