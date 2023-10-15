@@ -10,7 +10,7 @@ import TabPanel from "@mui/lab/TabPanel";
 
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import { colors } from "../constants";
-import { products } from "../data";
+import { products } from "../data/data";
 import { useParams } from "react-router-dom";
 
 import Rating from "@mui/material/Rating";
@@ -100,11 +100,11 @@ const useStyles = makeStyles({
     marginLeft: "100px",
   },
   colorButton: {
-    "width": 28,
-    "height": 28,
-    "borderRadius": 14,
-    "marginRight": 15,
-    "marginTop": 10,
+    width: 28,
+    height: 28,
+    borderRadius: 14,
+    marginRight: 15,
+    marginTop: 10,
     "&:hover": {
       border: "1px solid green",
       cursor: "pointer",
@@ -182,6 +182,7 @@ const ProductDetails = () => {
             <ItemGallery
               imagesList={currentProduct.imageSrc}
               category={currentProduct.category}
+              title={currentProduct.title}
             />
           </Grid>
           <Grid item container xs={1}></Grid>

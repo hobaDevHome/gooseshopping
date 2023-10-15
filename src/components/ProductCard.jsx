@@ -22,9 +22,9 @@ const useStyles = makeStyles({
     textOverflow: "ellipsis",
   },
   image: {
-    width: 100,
-    height: 50,
-    objectFit: "contain",
+    width: 270,
+    height: 270,
+    objectFit: "fill",
     display: "block",
   },
 
@@ -77,13 +77,13 @@ const ProductCard = ({ product }) => {
   return (
     <Card sx={{ maxWidth: 345 }}>
       <CardActionArea>
-        <CardMedia
-          component="img"
-          height="270"
-          image={require(`../images/products/${product.category}/${product.imageSrc[0]}.png`)}
-          alt="green iguana"
-        />
+        <CardMedia />
         <CardContent>
+          <img
+            className={classes.image}
+            src={require(`../images/products/${product.category}/${product.title}/${product.imageSrc[0]}`)}
+            alt="product"
+          />
           <p className={classes.title}>{product.title}</p>
           <div className={classes.rating}>
             <Rating name="read-only" value={product.rating} readOnly />

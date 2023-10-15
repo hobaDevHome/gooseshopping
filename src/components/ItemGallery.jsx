@@ -7,7 +7,7 @@ const useStyles = makeStyles({
   bigImage: {
     width: 430,
     height: 320,
-    objectFit: "cover",
+    objectFit: "contain",
 
     borderRadius: 4,
   },
@@ -22,9 +22,9 @@ const useStyles = makeStyles({
     display: "block",
   },
   thumbBox: {
-    "width": 102,
-    "height": 102,
-    "marginRight": 10,
+    width: 102,
+    height: 102,
+    marginRight: 10,
     "&:hover": {
       border: "1px solid green",
     },
@@ -42,13 +42,13 @@ const useStyles = makeStyles({
   },
 });
 
-const ItemGallery = ({ imagesList, category }) => {
+const ItemGallery = ({ imagesList, category, title }) => {
   const [activeThumb, setActiveThumb] = useState(0);
   const classes = useStyles();
   const ref = useRef(null);
 
   let mapped = imagesList.map((e) =>
-    require(`../images/products/${category}/${e}.png`)
+    require(`../images/products/${category}/${title}/${e}`)
   );
 
   mapped = mapped.length > 4 ? mapped.slice(0, 4) : mapped;

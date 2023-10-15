@@ -4,7 +4,7 @@ import Footer from "../components/Footer";
 import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
 import { colors } from "../constants";
-import { cartItems } from "../data";
+import { cartItems } from "../data/data";
 import Typography from "@mui/material/Typography";
 
 import { makeStyles } from "@mui/styles";
@@ -63,8 +63,8 @@ const useStyles = makeStyles({
     justifyContent: "center",
   },
   itemImage: {
-    width: 140,
-    height: 100,
+    width: 80,
+    height: 60,
     borderRadius: 3,
   },
   quantityContiner: {
@@ -115,17 +115,17 @@ const Cart = () => {
               justifyContent={"center"}
               alignItems={"center"}
             >
-              <Grid item sm={1}>
+              <Grid item sm={0.5}>
                 <div className={classes.deleteButton}>X</div>
               </Grid>
-              <Grid item sm={1}>
+              <Grid item sm={1.5}>
                 <img
-                  src={require(`../images/products/${item.category}/${item.imageSrc[0]}.png`)}
+                  src={require(`../images/products/${item.category}/${item.title}/${item.imageSrc[0]}`)}
                   alt="cartitem"
                   className={classes.itemImage}
                 />
               </Grid>
-              <Grid item sm={4}>
+              <Grid item sm={4} sx={{ textAlign: "left" }}>
                 {item.title}
               </Grid>
               <Grid item sm={2}>

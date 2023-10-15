@@ -1,7 +1,7 @@
 import React from "react";
 import Grid from "@mui/material/Grid";
 
-import { newsItems } from "../data";
+import { newsItems } from "../data/data";
 
 import { makeStyles } from "@mui/styles";
 

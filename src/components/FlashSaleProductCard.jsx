@@ -9,16 +9,20 @@ const useStyles = makeStyles({
     position: "relative",
     width: 350,
     height: 350,
+    backgroundColor: colors.white,
+    borderRadius: 10,
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
   },
   title: {
     fontSize: 20,
     fontWeight: "bold",
     color: colors.titleBlue,
-
     marginBottom: 15,
     marginTop: 5,
     position: "absolute",
-    top: 20,
+    top: 10,
     left: 20,
     width: "50%",
     whiteSpace: "nowrap",
@@ -27,16 +31,16 @@ const useStyles = makeStyles({
     argin: 0,
   },
   image: {
-    width: 350,
-    height: 350,
-    objectFit: "cover",
+    width: 270,
+    height: 270,
+    objectFit: "fill",
     display: "block",
     borderRadius: 10,
     position: "relative",
   },
 
   price: {
-    fontSize: 24,
+    fontSize: 18,
     color: colors.mainBlue,
     fontWeight: "bold",
     padding: 0,
@@ -50,7 +54,7 @@ const useStyles = makeStyles({
     top: 70,
     left: 20,
     fontWeight: "bold",
-    fontSize: 24,
+    fontSize: 18,
   },
 
   beforeprice: {
@@ -74,7 +78,7 @@ const FlashSaleProductCard = ({ product }) => {
     <div className={classes.container}>
       <img
         className={classes.image}
-        src={require(`../images/products/${product.category}/${product.imageSrc[0]}.png`)}
+        src={require(`../images/products/${product.category}/${product.title}/${product.imageSrc[0]}`)}
         alt="super flash sale"
       />
       <p className={classes.title}>{product.title}</p>

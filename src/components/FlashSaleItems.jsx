@@ -1,11 +1,11 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
-import { products } from "../data";
 import FlashSaleProductCard from "./FlashSaleProductCard";
 
 import Grid from "@mui/material/Grid";
 
-const FlashSaleItems = () => {
+const FlashSaleItems = ({ products }) => {
   return (
     <Grid
       container
@@ -15,7 +15,7 @@ const FlashSaleItems = () => {
       justifyContent={"center"}
     >
       <Grid item container xs={11} justifyContent={"center"} columnSpacing={5}>
-        {products.slice(0, 3).map((product) => {
+        {products.map((product) => {
           return (
             <Grid
               item
@@ -28,7 +28,9 @@ const FlashSaleItems = () => {
                 alignItems: "center",
               }}
             >
-              <FlashSaleProductCard product={product} key={product.id} />
+              <Link to={`/products/${product.id}`}>
+                <FlashSaleProductCard product={product} key={product.id} />
+              </Link>
             </Grid>
           );
         })}

@@ -8,15 +8,14 @@ import HomeAdd from "../components/HomeAdd";
 import ProductSection from "../components/ProductSection";
 import Hero from "../components/Hero";
 import FlashSaleItems from "../components/FlashSaleItems";
-import { products } from "../data";
 
-const Home = () => {
+const Home = ({ products }) => {
   return (
     <div>
       <Navbar active="Home" />
       <Hero />
-      <FlashSaleItems />
-      <ProductSection title="Best Seller" list={products} />
+      <FlashSaleItems products={products.slice(0, 3)} />
+      <ProductSection title="Best Seller" list={products.slice(5, 9)} />
       <HomeAdd />
       <Perks />
       <LatestNews />

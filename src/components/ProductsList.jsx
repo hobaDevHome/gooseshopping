@@ -38,7 +38,10 @@ const ProductsList = ({ productsList }) => {
         {productsList.map((product) => {
           return (
             <Grid item xs={12} md={6} lg={4} padding={1} key={product.id}>
-              <Link to={`/products/${product.id}`}>
+              <Link
+                to={`/products/${product.id}`}
+                style={{ textDecoration: "none" }}
+              >
                 <ProductCard product={product} />
               </Link>
             </Grid>

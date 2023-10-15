@@ -33,7 +33,10 @@ const ProductSection = ({ title, list }) => {
         {list.map((product) => {
           return (
             <Grid item xs={12} md={4} lg={3} padding={1} key={product.id}>
-              <Link to={`/products/${product.id}`}>
+              <Link
+                to={`/products/${product.id}`}
+                style={{ textDecoration: "none" }}
+              >
                 <ProductCard product={product} />
               </Link>
             </Grid>

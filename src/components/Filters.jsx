@@ -4,7 +4,7 @@ import Link from "@mui/material/Link";
 import Typography from "@mui/material/Typography";
 
 import { colors } from "../constants";
-import { products } from "../data";
+
 import { makeStyles } from "@mui/styles";
 
 const useStyles = makeStyles({
@@ -38,11 +38,11 @@ const useStyles = makeStyles({
     flexWrap: "wrap",
   },
   colorButton: {
-    "width": 28,
-    "height": 28,
-    "borderRadius": 14,
-    "marginRight": 15,
-    "marginTop": 10,
+    width: 28,
+    height: 28,
+    borderRadius: 14,
+    marginRight: 15,
+    marginTop: 10,
     "&:hover": {
       border: "1px solid green",
       cursor: "pointer",
@@ -50,7 +50,7 @@ const useStyles = makeStyles({
   },
 });
 
-const Filters = () => {
+const Filters = ({ products }) => {
   const classes = useStyles();
 
   const getFilterNames = (factor) => {
@@ -62,17 +62,17 @@ const Filters = () => {
     return categories;
   };
 
-  const categories = getFilterNames("category");
   const colros = getFilterNames("color");
   const brands = getFilterNames("brand");
 
   return (
     <div className={classes.column}>
-      {categories.length > 0 && (
-        <FitlesBox list={categories} title="Category" />
+      {brands.length > 0 && (
+        <FitlesBox list={brands} title="Brand" products={products} />
       )}
-      {colros.length > 0 && <FitlesBox list={colros} title="Color" />}
-      {brands.length > 0 && <FitlesBox list={brands} title="Brand" />}
+      {colros.length > 0 && (
+        <FitlesBox list={colros} title="Color" products={products} />
+      )}
 
       <div></div>
     </div>
@@ -81,7 +81,7 @@ const Filters = () => {
 
 export default Filters;
 
-const FitlesBox = ({ list, title }) => {
+const FitlesBox = ({ list, title, products }) => {
   const classes = useStyles();
   return (
     <Grid

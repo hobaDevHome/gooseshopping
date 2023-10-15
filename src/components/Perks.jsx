@@ -1,7 +1,7 @@
 import React from "react";
 import Grid from "@mui/material/Grid";
 
-import { perks } from "../data";
+import { perks } from "../data/data";
 
 import { makeStyles } from "@mui/styles";
 
