@@ -17,6 +17,7 @@ import {
 
 import ProductDetails from "./pages/ProductDetails";
 import Category from "./pages/Category";
+import ScrollToTop from "./components/ScrollToTop";
 
 function App() {
   const dispatch = useDispatch();
@@ -34,6 +35,7 @@ function App() {
 
   return (
     <div className="App">
+      <ScrollToTop />
       <Routes>
         <Route index element={<Home products={productsList} />} />
 

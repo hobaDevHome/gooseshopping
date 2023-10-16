@@ -25,9 +25,15 @@ const useStyles = makeStyles({
     width: 102,
     height: 102,
     marginRight: 10,
+    transition: "0.3s",
     "&:hover": {
-      border: "1px solid green",
+      transform: "scale(1.2)",
     },
+  },
+  thumbBox2: {
+    width: 102,
+    height: 102,
+    marginRight: 10,
   },
   thumbContianer: {
     display: "flex",
@@ -38,7 +44,7 @@ const useStyles = makeStyles({
     alignItems: "center",
   },
   thumbClicked: {
-    border: "2px solid blue",
+    border: "2px solid violet",
   },
 });
 
@@ -74,8 +80,10 @@ const ItemGallery = ({ imagesList }) => {
               ref={ref}
               onClick={() => setActiveThumb(index)}
               onMouseEnter={() => (activeThumb === index ? null : addHover())}
-              className={`${classes.thumbBox} ${
-                activeThumb === index ? `${classes.thumbClicked}` : ""
+              className={`${
+                activeThumb === index
+                  ? `${classes.thumbClicked}`
+                  : `${classes.thumbBox}`
               }`}
             >
               <div className={classes.thumbContianer}>

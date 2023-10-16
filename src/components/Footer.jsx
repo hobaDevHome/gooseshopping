@@ -123,7 +123,7 @@ const Footer = () => {
         </Grid>
       </Grid>
 
-      <Grid container xs={12} justifyContent={"space-between"}>
+      <Grid container item xs={12} justifyContent={"space-between"}>
         <Grid item xs={12} sm={6} md={3} lg={3}>
           <div className={classes.column}>
             <div className={classes.title}>Infomation</div>

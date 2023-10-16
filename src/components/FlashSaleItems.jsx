@@ -14,7 +14,7 @@ const FlashSaleItems = ({ products }) => {
       display={"flex"}
       justifyContent={"center"}
     >
-      <Grid item container xs={11} justifyContent={"center"} columnSpacing={5}>
+      <Grid item container xs={10} justifyContent={"center"} columnSpacing={5}>
         {products.map((product) => {
           return (
             <Grid

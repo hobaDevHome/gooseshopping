@@ -1,7 +1,6 @@
 import React from "react";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
-import CardMedia from "@mui/material/CardMedia";
 
 import Rating from "@mui/material/Rating";
 import { CardActionArea } from "@mui/material";
@@ -22,9 +21,9 @@ const useStyles = makeStyles({
     textOverflow: "ellipsis",
   },
   image: {
-    width: 270,
-    height: 270,
-    objectFit: "fill",
+    width: 220,
+    height: 180,
+    objectFit: "contain",
     display: "block",
   },
 
@@ -77,7 +76,6 @@ const ProductCard = ({ product }) => {
   return (
     <Card sx={{ maxWidth: 345 }}>
       <CardActionArea>
-        <CardMedia />
         <CardContent>
           <img
             className={classes.image}

@@ -33,6 +33,7 @@ const useStyles = makeStyles({
     alignItems: "center",
     fontSize: 20,
     borderRadius: 3,
+    cursor: "pointer",
   },
   checkoutRow: {
     display: "flex",
@@ -79,6 +80,13 @@ const useStyles = makeStyles({
     fontWeight: "bold",
     padding: "10px 15px",
   },
+  addremoveButtonBox: {
+    color: colors.mainBlue,
+    fontSize: 22,
+    cursor: "pointer",
+    width: 30,
+    height: 30,
+  },
 });
 
 const Cart = () => {
@@ -87,7 +95,7 @@ const Cart = () => {
     <div>
       <Navbar />
 
-      <Grid container xs={12} marginTop={5}>
+      <Grid container marginTop={5}>
         <Grid container item xs={12} padding={1}>
           <Grid item sm={6}>
             PRODUCT
@@ -134,9 +142,9 @@ const Cart = () => {
               </Grid>
               <Grid item container sm={2} justifyContent={"center"}>
                 <div className={classes.quantityContiner}>
-                  <div style={{ color: colors.mainBlue, fontSize: 22 }}>-</div>
+                  <div className={classes.addremoveButtonBox}>-</div>
                   <div>{item.quantity}</div>
-                  <div style={{ color: colors.mainBlue, fontSize: 22 }}>+</div>
+                  <div className={classes.addremoveButtonBox}>+</div>
                 </div>
               </Grid>
               <Grid item sm={2}>

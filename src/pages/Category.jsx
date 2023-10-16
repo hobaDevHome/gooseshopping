@@ -33,7 +33,7 @@ const Category = ({ category, products }) => {
   return (
     <div>
       <Navbar active={`${category[0].toUpperCase() + category.slice(1)}`} />
-      <Grid container xs={12} marginTop={10}>
+      <Grid container marginTop={10}>
         <Grid container item xs={3}>
           <Filters products={productsList} filterProducts={filterProducts} />
         </Grid>

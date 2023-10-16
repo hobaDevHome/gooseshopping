@@ -44,9 +44,10 @@ const useStyles = makeStyles({
     borderRadius: 14,
     marginRight: 15,
     marginTop: 10,
+    transition: "0.3s",
+    cursor: "pointer",
     "&:hover": {
-      border: "1px solid green",
-      cursor: "pointer",
+      transform: "scale(1.2)",
     },
   },
   clear: {

@@ -108,9 +108,10 @@ const useStyles = makeStyles({
     borderRadius: 14,
     marginRight: 15,
     marginTop: 10,
+    transition: "0.3s",
+    cursor: "pointer",
     "&:hover": {
-      border: "1px solid green",
-      cursor: "pointer",
+      transform: "scale(1.4)",
     },
   },
   title: {
@@ -149,6 +150,13 @@ const useStyles = makeStyles({
     color: colors.iconPink,
     marginLeft: 10,
   },
+  addremoveButtonBox: {
+    color: colors.mainBlue,
+    fontSize: 22,
+    cursor: "pointer",
+    width: 40,
+    height: 40,
+  },
 });
 
 const ProductDetails = ({ products }) => {
@@ -177,7 +185,7 @@ const ProductDetails = ({ products }) => {
       />
       {currentProduct ? (
         <>
-          <Grid container xs={12} marginTop={5}>
+          <Grid container marginTop={5}>
             <Grid item container xs={12} marginTop={1} marginBottom={4}>
               <Grid item container xs={5}>
                 <ItemGallery
@@ -323,13 +331,9 @@ const ProductDetails = ({ products }) => {
                   }}
                 >
                   <div className={classes.quantityContiner}>
-                    <div style={{ color: colors.mainBlue, fontSize: 22 }}>
-                      -
-                    </div>
+                    <div className={classes.addremoveButtonBox}>-</div>
                     <div>7</div>
-                    <div style={{ color: colors.mainBlue, fontSize: 22 }}>
-                      +
-                    </div>
+                    <div className={classes.addremoveButtonBox}>+</div>
                   </div>
                   <Box
                     sx={{
@@ -341,6 +345,12 @@ const ProductDetails = ({ products }) => {
                       color: colors.mainBlue,
                       alignItems: "center",
                       height: "50px",
+                      cursor: "pointer",
+                      transition: "0.3s",
+
+                      "&:hover": {
+                        transform: "scale(1.2)",
+                      },
                     }}
                   >
                     <ShoppingCartOutlinedIcon sx={{ marginRight: 3 }} />
@@ -478,12 +488,19 @@ const SocialMediaButton = ({ type }) => {
   return (
     <Box
       sx={{
-        backgroundColor: bgColor,
+        backgroundColor: "GrayText",
         padding: "10px 20px",
         borderRadius: 1,
         color: colors.white,
         justifyContent: "center",
         alignItems: "center",
+        transition: "all 0.4s ease 0s",
+        cursor: "pointer",
+
+        "&:hover": {
+          backgroundColor: bgColor,
+          transform: "scale(1.05)",
+        },
       }}
     >
       <img src={icon} alt="facebook" className={classes.socialIcon} />

@@ -44,7 +44,7 @@ const Hero = () => {
   const classes = useStyles();
 
   return (
-    <Grid container xs={12} padding={1} className={classes.container}>
+    <Grid container padding={1} className={classes.container}>
       <Grid
         container
         item

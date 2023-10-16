@@ -1,9 +1,10 @@
-// Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "@firebase/firestore";
 
+let key = process.env.REACT_APP_API_KEY;
+
 const firebaseConfig = {
-  apiKey: "AIzaSyCoRf0nn5q8EH8oSRC0MGHH3kkwqFoT6Og",
+  apiKey: key,
   authDomain: "sarhan-redux.firebaseapp.com",
   databaseURL: "https://sarhan-redux-default-rtdb.firebaseio.com",
   projectId: "sarhan-redux",

@@ -3,14 +3,16 @@ import React from "react";
 import { colors } from "../constants";
 
 import { makeStyles } from "@mui/styles";
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import { CardActionArea } from "@mui/material";
 
 const useStyles = makeStyles({
   container: {
     position: "relative",
-    width: 350,
-    height: 350,
-    backgroundColor: colors.white,
-    borderRadius: 10,
+    width: 320,
+    height: 320,
+
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
@@ -31,9 +33,9 @@ const useStyles = makeStyles({
     argin: 0,
   },
   image: {
-    width: 270,
-    height: 270,
-    objectFit: "fill",
+    width: 220,
+    height: 140,
+    objectFit: "contain",
     display: "block",
     borderRadius: 10,
     position: "relative",
@@ -51,7 +53,7 @@ const useStyles = makeStyles({
   },
   discountDiv: {
     position: "absolute",
-    top: 70,
+    top: 60,
     left: 20,
     fontWeight: "bold",
     fontSize: 18,
@@ -75,21 +77,32 @@ const FlashSaleProductCard = ({ product }) => {
   );
 
   return (
-    <div className={classes.container}>
-      <img
-        className={classes.image}
-        src={product.imageSrc[0]}
-        alt="super flash sale"
-      />
-      <p className={classes.title}>{product.title}</p>
-      <p className={classes.price}>${newPrice}</p>
-      {product.discount !== 0 && (
-        <div className={classes.discountDiv}>
-          <span className={classes.beforeprice}>${product.price}</span>
-          <span className={classes.discount}>{product.discount}% Off</span>
-        </div>
-      )}
-    </div>
+    <Card sx={{ width: 320, height: 320 }}>
+      <CardActionArea className={classes.container}>
+        <CardContent
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <img
+            className={classes.image}
+            src={product.imageSrc[0]}
+            alt="super flash sale"
+          />
+          <p className={classes.title}>{product.title}</p>
+          <p className={classes.price}>${newPrice}</p>
+
+          {product.discount !== 0 && (
+            <div className={classes.discountDiv}>
+              <span className={classes.beforeprice}>${product.price}</span>
+              <span className={classes.discount}>{product.discount}% Off</span>
+            </div>
+          )}
+        </CardContent>
+      </CardActionArea>
+    </Card>
   );
 };
 
