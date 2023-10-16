@@ -81,7 +81,7 @@ const ProductCard = ({ product }) => {
         <CardContent>
           <img
             className={classes.image}
-            src={require(`../images/products/${product.category}/${product.title}/${product.imageSrc[0]}`)}
+            src={product.imageSrc[0]}
             alt="product"
           />
           <p className={classes.title}>{product.title}</p>

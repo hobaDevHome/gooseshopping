@@ -1,8 +1,8 @@
 import React from "react";
 import { useState, useRef } from "react";
-import Grid from "@mui/material/Grid";
+
 import { makeStyles } from "@mui/styles";
-import { colors } from "../constants";
+
 const useStyles = makeStyles({
   bigImage: {
     width: 430,
@@ -42,16 +42,12 @@ const useStyles = makeStyles({
   },
 });
 
-const ItemGallery = ({ imagesList, category, title }) => {
+const ItemGallery = ({ imagesList }) => {
   const [activeThumb, setActiveThumb] = useState(0);
   const classes = useStyles();
   const ref = useRef(null);
 
-  let mapped = imagesList.map((e) =>
-    require(`../images/products/${category}/${title}/${e}`)
-  );
-
-  mapped = mapped.length > 4 ? mapped.slice(0, 4) : mapped;
+  let mapped = imagesList.length > 4 ? imagesList.slice(0, 4) : imagesList;
   const addHover = () => {
     console.log("test");
     const div = ref.current;
@@ -68,7 +64,7 @@ const ItemGallery = ({ imagesList, category, title }) => {
         justifyContent: "space-between",
       }}
     >
-      <img src={mapped[activeThumb]} alt="" className={classes.bigImage} />
+      <img src={imagesList[activeThumb]} alt="" className={classes.bigImage} />
 
       <div style={{ display: "flex", flexDirection: "row", marginTop: 20 }}>
         {mapped.map((e, index) => {
@@ -94,9 +90,3 @@ const ItemGallery = ({ imagesList, category, title }) => {
 };
 
 export default ItemGallery;
-
-function mapImagesForLocal(list) {
-  let mappledList = [...list];
-
-  return mappledList;
-}

@@ -20,7 +20,6 @@ const Category = ({ category, products }) => {
   useEffect(() => {
     const prdocuts = products.filter((item) => item.category === category);
 
-    console.log("filter", filter);
     if (filter !== "") {
       const filteredProducts = prdocuts.filter(
         (e) => e[filter] === filterValue
@@ -30,8 +29,6 @@ const Category = ({ category, products }) => {
       setproductsList(prdocuts);
     }
   }, [filter, filterValue, category, products]);
-  console.log("filter", filter);
-  console.log("filterValue", filterValue);
 
   return (
     <div>

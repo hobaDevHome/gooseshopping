@@ -28,30 +28,33 @@ function App() {
     dispatch(fetchProducts());
   }, [dispatch]);
 
-  console.log("productsList", productsList);
-  console.log("status", status);
-  console.log("error", error);
+  // console.log("productsList", productsList);
+  // console.log("status", status);
+  // console.log("error", error);
 
   return (
     <div className="App">
       <Routes>
-        <Route index element={<Home products={products} />} />
+        <Route index element={<Home products={productsList} />} />
 
         <Route
           path="/Bags"
-          element={<Category category="bags" products={products} />}
+          element={<Category category="bags" products={productsList} />}
         />
         <Route
           path="/Belts"
-          element={<Category category="belts" products={products} />}
+          element={<Category category="belts" products={productsList} />}
         />
         <Route
           path="/Sneakers"
-          element={<Category category="sneakers" products={products} />}
+          element={<Category category="sneakers" products={productsList} />}
         />
         <Route path="/cart" element={<Cart />} />
         <Route path="/Contact" element={<Contact />} />
-        <Route path="/products/:id" element={<ProductDetails />} />
+        <Route
+          path="/products/:id"
+          element={<ProductDetails products={productsList} />}
+        />
       </Routes>
     </div>
   );

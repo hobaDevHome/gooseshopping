@@ -7,10 +7,12 @@ import Tab from "@mui/material/Tab";
 import TabContext from "@mui/lab/TabContext";
 import TabList from "@mui/lab/TabList";
 import TabPanel from "@mui/lab/TabPanel";
+import Button from "@mui/material/Button";
+import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import { colors } from "../constants";
-import { products } from "../data/data";
+
 import { useParams } from "react-router-dom";
 
 import Rating from "@mui/material/Rating";
@@ -26,6 +28,7 @@ import twitterlogo from "../images/twitter.png";
 import { makeStyles } from "@mui/styles";
 import ProductSection from "../components/ProductSection";
 import ItemGallery from "../components/ItemGallery";
+import Typography from "@mui/material/Typography";
 
 const colorsList = ["blue", "red", "black", "yellow"];
 
@@ -148,20 +151,17 @@ const useStyles = makeStyles({
   },
 });
 
-const ProductDetails = () => {
+const ProductDetails = ({ products }) => {
   const [size, setSize] = useState("");
   const classes = useStyles();
   let { id } = useParams();
 
-  let currentProduct = products.find((e) => e.id === Number(id));
+  let currentProduct = products.find((e) => e.id === id);
 
   const handleChange = (event) => {
     setSize(event.target.value);
   };
 
-  if (!currentProduct) {
-    return <h2>prodcut not found</h2>;
-  }
   let newPrice = Math.floor(
     currentProduct.price -
       (currentProduct.price * currentProduct.discount) / 100
@@ -175,184 +175,210 @@ const ProductDetails = () => {
           currentProduct.category.slice(1)
         }
       />
-
-      <Grid container xs={12} marginTop={5}>
-        <Grid item container xs={12} marginTop={1} marginBottom={4}>
-          <Grid item container xs={5}>
-            <ItemGallery
-              imagesList={currentProduct.imageSrc}
-              category={currentProduct.category}
-              title={currentProduct.title}
-            />
-          </Grid>
-          <Grid item container xs={1}></Grid>
-          <Grid
-            item
-            container
-            xs={6}
-            columnSpacing={1}
-            display={"flex"}
-            flexDirection="column"
-          >
-            <p className={classes.title}>{currentProduct.title}</p>
-            <div className={classes.rating}>
-              <Rating name="read-only" value={currentProduct.rating} readOnly />
-            </div>
-
-            <div className={classes.divider} />
-            <p className={classes.price}>
-              ${newPrice}
-              {currentProduct.discount !== 0 && (
-                <>
-                  <span className={classes.beforeprice}>
-                    ${currentProduct.price}
-                  </span>
-                  <span className={classes.discount}>
-                    {currentProduct.discount}% Off
-                  </span>
-                </>
-              )}
-            </p>
-
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "row",
-                width: "40%",
-                justifyContent: "space-between",
-                textAlign: "left",
-              }}
-            >
-              <div style={{ display: "flex", flex: 3 }}>
-                <p>Availability:</p>
-              </div>
-              <div style={{ display: "flex", flex: 1 }}>
-                <p>In stock</p>
-              </div>
-            </div>
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "row",
-                width: "40%",
-                justifyContent: "space-between",
-                textAlign: "left",
-              }}
-            >
-              <div style={{ display: "flex", flex: 3 }}>
-                <p>Category:</p>
-              </div>
-              <div style={{ display: "flex", flex: 1 }}>
-                <p>{currentProduct.category}</p>
-              </div>
-            </div>
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "row",
-                width: "40%",
-                justifyContent: "space-between",
-                textAlign: "left",
-              }}
-            >
-              <p>Free shipping</p>
-            </div>
-            <div className={classes.divider} />
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "row",
-                marginBottom: "20px",
-              }}
-            >
-              <p>Select Color:</p>
-              <div className={classes.colorsDiv}>
-                {colorsList.map((e, index) => {
-                  return (
-                    <div
-                      key={index}
-                      className={classes.colorButton}
-                      style={{ backgroundColor: e }}
-                    ></div>
-                  );
-                })}
-              </div>
-            </div>
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "row",
-              }}
-            >
-              <p>Size</p>
-              <Box sx={{ minWidth: 120, textAlign: "left", marginLeft: 20 }}>
-                <FormControl fullWidth>
-                  <InputLabel id="demo-simple-select-label">Size</InputLabel>
-                  <Select
-                    labelId="demo-simple-select-label"
-                    id="demo-simple-select"
-                    value={size}
-                    label="Size"
-                    onChange={handleChange}
-                  >
-                    <MenuItem value={10}>xs</MenuItem>
-                    <MenuItem value={20}>sm</MenuItem>
-                    <MenuItem value={30}>md</MenuItem>
-                    <MenuItem value={40}>lg</MenuItem>
-                    <MenuItem value={50}>xl</MenuItem>
-                  </Select>
-                </FormControl>
-              </Box>
-            </div>
-            <div className={classes.divider} />
-
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "row",
-                justifyContent: "space-between",
-              }}
-            >
-              <div className={classes.quantityContiner}>
-                <div style={{ color: colors.mainBlue, fontSize: 22 }}>-</div>
-                <div>7</div>
-                <div style={{ color: colors.mainBlue, fontSize: 22 }}>+</div>
-              </div>
-              <Box
-                sx={{
-                  backgroundColor: colors.cartBlue,
-                  padding: "5px 20px",
-                  borderRadius: 2,
-                  display: "flex",
-                  flexDirection: "row",
-                  color: colors.mainBlue,
-                  alignItems: "center",
-                  height: "50px",
-                }}
+      {currentProduct ? (
+        <>
+          <Grid container xs={12} marginTop={5}>
+            <Grid item container xs={12} marginTop={1} marginBottom={4}>
+              <Grid item container xs={5}>
+                <ItemGallery
+                  imagesList={currentProduct.imageSrc}
+                  category={currentProduct.category}
+                  title={currentProduct.title}
+                />
+              </Grid>
+              <Grid item container xs={1}></Grid>
+              <Grid
+                item
+                container
+                xs={6}
+                columnSpacing={1}
+                display={"flex"}
+                flexDirection="column"
               >
-                <ShoppingCartOutlinedIcon sx={{ marginRight: 3 }} />
-                <p>Add To Cart</p>
-              </Box>
-            </div>
+                <p className={classes.title}>{currentProduct.title}</p>
+                <div className={classes.rating}>
+                  <Rating
+                    name="read-only"
+                    value={currentProduct.rating}
+                    readOnly
+                  />
+                </div>
 
-            <div className={classes.divider} />
-          </Grid>
-        </Grid>
-        <Grid item container xs={12} marginTop={1} marginBottom={4}>
-          <Grid item container xs={6}></Grid>
-          <Grid item container xs={6} columnSpacing={1}>
-            <Grid item xs={6}>
-              <SocialMediaButton type={"facebook"} />
+                <div className={classes.divider} />
+                <p className={classes.price}>
+                  ${newPrice}
+                  {currentProduct.discount !== 0 && (
+                    <>
+                      <span className={classes.beforeprice}>
+                        ${currentProduct.price}
+                      </span>
+                      <span className={classes.discount}>
+                        {currentProduct.discount}% Off
+                      </span>
+                    </>
+                  )}
+                </p>
+
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "row",
+                    width: "40%",
+                    justifyContent: "space-between",
+                    textAlign: "left",
+                  }}
+                >
+                  <div style={{ display: "flex", flex: 3 }}>
+                    <p>Availability:</p>
+                  </div>
+                  <div style={{ display: "flex", flex: 1 }}>
+                    <p>In stock</p>
+                  </div>
+                </div>
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "row",
+                    width: "40%",
+                    justifyContent: "space-between",
+                    textAlign: "left",
+                  }}
+                >
+                  <div style={{ display: "flex", flex: 3 }}>
+                    <p>Category:</p>
+                  </div>
+                  <div style={{ display: "flex", flex: 1 }}>
+                    <p>{currentProduct.category}</p>
+                  </div>
+                </div>
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "row",
+                    width: "40%",
+                    justifyContent: "space-between",
+                    textAlign: "left",
+                  }}
+                >
+                  <p>Free shipping</p>
+                </div>
+                <div className={classes.divider} />
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "row",
+                    marginBottom: "20px",
+                  }}
+                >
+                  <p>Select Color:</p>
+                  <div className={classes.colorsDiv}>
+                    {colorsList.map((e, index) => {
+                      return (
+                        <div
+                          key={index}
+                          className={classes.colorButton}
+                          style={{ backgroundColor: e }}
+                        ></div>
+                      );
+                    })}
+                  </div>
+                </div>
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "row",
+                  }}
+                >
+                  <p>Size</p>
+                  <Box
+                    sx={{ minWidth: 120, textAlign: "left", marginLeft: 20 }}
+                  >
+                    <FormControl fullWidth>
+                      <InputLabel id="demo-simple-select-label">
+                        Size
+                      </InputLabel>
+                      <Select
+                        labelId="demo-simple-select-label"
+                        id="demo-simple-select"
+                        value={size}
+                        label="Size"
+                        onChange={handleChange}
+                      >
+                        <MenuItem value={10}>xs</MenuItem>
+                        <MenuItem value={20}>sm</MenuItem>
+                        <MenuItem value={30}>md</MenuItem>
+                        <MenuItem value={40}>lg</MenuItem>
+                        <MenuItem value={50}>xl</MenuItem>
+                      </Select>
+                    </FormControl>
+                  </Box>
+                </div>
+                <div className={classes.divider} />
+
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "row",
+                    justifyContent: "space-between",
+                  }}
+                >
+                  <div className={classes.quantityContiner}>
+                    <div style={{ color: colors.mainBlue, fontSize: 22 }}>
+                      -
+                    </div>
+                    <div>7</div>
+                    <div style={{ color: colors.mainBlue, fontSize: 22 }}>
+                      +
+                    </div>
+                  </div>
+                  <Box
+                    sx={{
+                      backgroundColor: colors.cartBlue,
+                      padding: "5px 20px",
+                      borderRadius: 2,
+                      display: "flex",
+                      flexDirection: "row",
+                      color: colors.mainBlue,
+                      alignItems: "center",
+                      height: "50px",
+                    }}
+                  >
+                    <ShoppingCartOutlinedIcon sx={{ marginRight: 3 }} />
+                    <p>Add To Cart</p>
+                  </Box>
+                </div>
+
+                <div className={classes.divider} />
+              </Grid>
             </Grid>
-            <Grid item xs={6}>
-              <SocialMediaButton type={"twitter"} />
+            <Grid item container xs={12} marginTop={1} marginBottom={4}>
+              <Grid item container xs={6}></Grid>
+              <Grid item container xs={6} columnSpacing={1}>
+                <Grid item xs={6}>
+                  <SocialMediaButton type={"facebook"} />
+                </Grid>
+                <Grid item xs={6}>
+                  <SocialMediaButton type={"twitter"} />
+                </Grid>
+              </Grid>
+            </Grid>
+            <Grid item container xs={12} marginTop={1}>
+              <ProductInfoPanel item={currentProduct} />
             </Grid>
           </Grid>
-        </Grid>
-        <Grid item container xs={12} marginTop={1}>
-          <ProductInfoPanel item={currentProduct} />
-        </Grid>
-      </Grid>
+        </>
+      ) : (
+        <>
+          <div>
+            <Typography variant="h6" gutterBottom marginTop={5}>
+              Sorry, we couldn't find this page
+            </Typography>
+            <Button variant="outlined" startIcon={<HomeOutlinedIcon />}>
+              Back to Home
+            </Button>
+          </div>
+        </>
+      )}
 
       <ProductSection title="RELATED PRODUCTS" list={products.slice(0, 4)} />
 
