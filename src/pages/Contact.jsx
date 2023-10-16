@@ -93,7 +93,6 @@ const Contact = () => {
       <Paper elevation={3} padding={0}>
         <Grid
           container
-          xs={12}
           padding={0}
           marginTop={10}
           flexDirection={{ sm: "column", md: "row" }}

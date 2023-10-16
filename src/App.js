@@ -29,10 +29,6 @@ function App() {
     dispatch(fetchProducts());
   }, [dispatch]);
 
-  // console.log("productsList", productsList);
-  // console.log("status", status);
-  // console.log("error", error);
-
   return (
     <div className="App">
       <ScrollToTop />

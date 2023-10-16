@@ -48,7 +48,7 @@ const useStyles = makeStyles({
 
 const Perks = () => {
   return (
-    <Grid container xs={12} marginTop={10}>
+    <Grid container marginTop={10}>
       <Grid container item xs={12} padding={1}>
         {perks.map((item) => {
           return (

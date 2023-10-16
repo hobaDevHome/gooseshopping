@@ -7,13 +7,7 @@ import Grid from "@mui/material/Grid";
 
 const FlashSaleItems = ({ products }) => {
   return (
-    <Grid
-      container
-      xs={12}
-      marginTop={-15}
-      display={"flex"}
-      justifyContent={"center"}
-    >
+    <Grid container marginTop={-15} display={"flex"} justifyContent={"center"}>
       <Grid item container xs={10} justifyContent={"center"} columnSpacing={5}>
         {products.map((product) => {
           return (

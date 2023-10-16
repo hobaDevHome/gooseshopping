@@ -55,7 +55,6 @@ const ItemGallery = ({ imagesList }) => {
 
   let mapped = imagesList.length > 4 ? imagesList.slice(0, 4) : imagesList;
   const addHover = () => {
-    console.log("test");
     const div = ref.current;
 
     if (div) {

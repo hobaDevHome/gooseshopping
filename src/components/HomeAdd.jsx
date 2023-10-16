@@ -61,7 +61,6 @@ const HomeAdd = () => {
   return (
     <Grid
       container
-      xs={12}
       padding={1}
       className={classes.container}
       flexDirection={{ sm: "column-reverse", md: "row" }}

@@ -73,7 +73,6 @@ const Footer = () => {
   return (
     <Grid
       container
-      xs={12}
       marginTop={5}
       justifyContent={"center"}
       padding={5}
