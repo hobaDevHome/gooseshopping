@@ -8,28 +8,28 @@ import Grid from "@mui/material/Grid";
 const FlashSaleItems = ({ products }) => {
   return (
     <Grid container marginTop={-15} display={"flex"} justifyContent={"center"}>
-      <Grid item container xs={10} justifyContent={"center"} columnSpacing={5}>
-        {products.map((product) => {
-          return (
-            <Grid
-              item
-              sm={12}
-              md={4}
-              lg={4}
-              sx={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-              }}
-              key={product.id}
-            >
-              <Link to={`/products/${product.id}`}>
-                <FlashSaleProductCard product={product} key={product.id} />
-              </Link>
-            </Grid>
-          );
-        })}
-      </Grid>
+      {products.map((product) => {
+        return (
+          <Grid
+            item
+            xs={12}
+            sm={6}
+            md={6}
+            lg={4}
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+            key={product.id}
+            marginBottom={2}
+          >
+            <Link to={`/products/${product.id}`}>
+              <FlashSaleProductCard product={product} key={product.id} />
+            </Link>
+          </Grid>
+        );
+      })}
     </Grid>
   );
 };

@@ -10,12 +10,9 @@ import Typography from "@mui/material/Typography";
 import { makeStyles } from "@mui/styles";
 
 const useStyles = makeStyles({
-  container: {},
   searchInputContainer: {
     display: "flex",
     flexDirection: "row",
-    width: "60%",
-
     borderRadius: 3,
     borderColor: colors.divider,
     borderWidth: 2,
@@ -39,7 +36,7 @@ const useStyles = makeStyles({
     display: "flex",
     flexDirection: "row",
     justifyContent: "space-between",
-    width: "60%",
+    width: "100%",
   },
   divider: {
     width: "100%",
@@ -65,7 +62,7 @@ const useStyles = makeStyles({
   },
   itemImage: {
     width: 80,
-    height: 60,
+    height: 80,
     borderRadius: 3,
   },
   quantityContiner: {
@@ -96,7 +93,13 @@ const Cart = () => {
       <Navbar />
 
       <Grid container marginTop={5}>
-        <Grid container item xs={12} padding={1}>
+        <Grid
+          container
+          item
+          xs={12}
+          padding={1}
+          display={{ xs: "none", sm: "none", md: "flex" }}
+        >
           <Grid item sm={6}>
             PRODUCT
           </Grid>
@@ -115,54 +118,59 @@ const Cart = () => {
         </Grid>
         {cartItems.map((item) => {
           return (
-            <Grid
-              key={item.id}
-              container
-              item
-              xs={12}
-              padding={1}
-              justifyContent={"center"}
-              alignItems={"center"}
-            >
-              <Grid item sm={0.5}>
+            <Grid key={item.id} container item xs={12} padding={1}>
+              <Grid
+                item
+                sm={0}
+                md={0.5}
+                display={{ xs: "none", sm: "none", md: "flex" }}
+              >
                 <div className={classes.deleteButton}>X</div>
               </Grid>
-              <Grid item sm={1.5}>
+              <Grid item sm={2} md={1.5}>
                 <img
                   src={require(`../images/products/${item.category}/${item.title}/${item.imageSrc[0]}`)}
                   alt="cartitem"
                   className={classes.itemImage}
                 />
               </Grid>
-              <Grid item sm={4} sx={{ textAlign: "left" }}>
+              <Grid
+                item
+                sm={6}
+                md={4}
+                sx={{ textAlign: "left", flexWrap: "wrap" }}
+              >
                 {item.title}
               </Grid>
-              <Grid item sm={2}>
+              <Grid
+                item
+                sm={0}
+                md={2}
+                display={{ xs: "none", sm: "none", md: "flex" }}
+              >
                 ${item.price * item.quantity}
               </Grid>
-              <Grid item container sm={2} justifyContent={"center"}>
+              <Grid item sm={2} md={2} justifyContent={"center"}>
                 <div className={classes.quantityContiner}>
                   <div className={classes.addremoveButtonBox}>-</div>
                   <div>{item.quantity}</div>
                   <div className={classes.addremoveButtonBox}>+</div>
                 </div>
               </Grid>
-              <Grid item sm={2}>
+              <Grid item sm={2} md={2}>
                 ${item.price}
-              </Grid>
-              <Grid container item xs={12} padding={1} marginTop={2}>
-                <div className={classes.divider} />
               </Grid>
             </Grid>
           );
         })}
 
-        <Grid item container xs={12} flexDirection="row" marginTop={3}>
+        <Grid item container xs={12} marginTop={3}>
           <Grid
             item
             xs={12}
             sm={12}
-            md={6}
+            md={4}
+            padding={1}
             justifyContent={"flex-start"}
             alignSelf={"flex-start"}
           >
@@ -179,8 +187,17 @@ const Cart = () => {
               </div>
             </div>
           </Grid>
-
-          <Grid item container xs={12} sm={12} md={6}>
+          <Grid item xs={12} sm={12} md={4}></Grid>
+          <Grid
+            item
+            container
+            xs={12}
+            sm={12}
+            md={3.8}
+            padding={1}
+            marginRight={1}
+            marginTop={{ sx: 2, md: 0 }}
+          >
             <Grid
               container
               item

@@ -21,7 +21,7 @@ const useStyles = makeStyles({
     textOverflow: "ellipsis",
   },
   image: {
-    width: 220,
+    width: "100%",
     height: 180,
     objectFit: "contain",
     display: "block",
@@ -74,7 +74,7 @@ const ProductCard = ({ product }) => {
   );
 
   return (
-    <Card sx={{ maxWidth: 345 }}>
+    <Card sx={{ maxWidth: 270, marginBottom: 2 }}>
       <CardActionArea>
         <CardContent>
           <img

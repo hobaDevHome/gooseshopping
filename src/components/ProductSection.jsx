@@ -25,14 +25,25 @@ const ProductSection = ({ title, list }) => {
   const classes = useStyles();
 
   return (
-    <Grid container item xs={12} marginTop={7}>
+    <Grid container marginTop={7}>
       <div className={classes.column}>
         <p className={classes.title}>{title}</p>
       </div>
-      <Grid container item xs={12} padding={1}>
+      <Grid container item xs={12}>
         {list.map((product) => {
           return (
-            <Grid item xs={12} md={4} lg={3} padding={1} key={product.id}>
+            <Grid
+              item
+              xs={12}
+              sm={6}
+              md={6}
+              lg={3}
+              padding={1}
+              key={product.id}
+              display={"flex"}
+              justifyContent="center"
+              alignItems="center"
+            >
               <Link
                 to={`/products/${product.id}`}
                 style={{ textDecoration: "none" }}

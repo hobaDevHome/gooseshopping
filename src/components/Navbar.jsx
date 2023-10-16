@@ -22,7 +22,7 @@ import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 
 const pages = ["Home", "Bags", "Sneakers", "Belts", "Contact"];
 
-function ResponsiveAppBar({ active }) {
+function ResponsiveAppBar({ active = "" }) {
   const [selected, setselected] = useState(0);
 
   const [anchorElNav, setAnchorElNav] = useState(null);

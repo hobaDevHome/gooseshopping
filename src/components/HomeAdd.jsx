@@ -30,7 +30,7 @@ const useStyles = makeStyles({
   },
 
   image: {
-    width: 500,
+    width: "auto",
     height: 300,
     objectFit: "contain",
     marginTop: -80,
@@ -63,16 +63,10 @@ const HomeAdd = () => {
       container
       padding={1}
       className={classes.container}
-      flexDirection={{ sm: "column-reverse", md: "row" }}
+      marginTop={15}
+      flexDirection={{ md: "column-reverse", lg: "row" }}
     >
-      <Grid
-        container
-        item
-        xs={12}
-        md={6}
-        padding={1}
-        className={classes.lefContainer}
-      >
+      <Grid item xs={12} md={6} padding={5} className={classes.lefContainer}>
         <div className={classes.column}>
           <p className={classes.title}>Adidas Men Running Sneakers</p>
           <p className={classes.text}>

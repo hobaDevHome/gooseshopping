@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
@@ -37,7 +38,7 @@ const useStyles = makeStyles({
   image: {
     width: 400,
     height: 450,
-    objectFit: "contian",
+    objectFit: "contain",
   },
   title: {
     fontSize: 40,

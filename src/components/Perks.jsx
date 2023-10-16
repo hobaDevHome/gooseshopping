@@ -28,7 +28,7 @@ const useStyles = makeStyles({
   image: {
     width: 60,
     height: 60,
-    objectFit: "contian",
+    objectFit: "contain",
     display: "block",
     marginBottom: 40,
   },
@@ -48,7 +48,7 @@ const useStyles = makeStyles({
 
 const Perks = () => {
   return (
-    <Grid container marginTop={10}>
+    <Grid container marginTop={{ xs: 30, sm: 15, md: 10 }}>
       <Grid container item xs={12} padding={1}>
         {perks.map((item) => {
           return (
