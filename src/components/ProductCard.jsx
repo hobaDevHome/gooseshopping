@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
+import Box from "@mui/material/Box";
+import LinearProgress from "@mui/material/LinearProgress";
 
 import Rating from "@mui/material/Rating";
 import { CardActionArea } from "@mui/material";
@@ -68,6 +70,8 @@ const useStyles = makeStyles({
 });
 
 const ProductCard = ({ product }) => {
+  const [loading, setLoading] = useState(true);
+
   const classes = useStyles();
   let newPrice = Math.floor(
     product.price - (product.price * product.discount) / 100
@@ -76,12 +80,17 @@ const ProductCard = ({ product }) => {
   return (
     <Card sx={{ maxWidth: 270, marginBottom: 2 }}>
       <CardActionArea>
-        <CardContent>
+        <CardContent sx={{ position: "relative" }}>
           <img
             className={classes.image}
             src={product.imageSrc[0]}
             alt="product"
+            onLoad={() => setLoading(false)}
           />
+
+          <div style={{ display: loading ? "block" : "none" }}>
+            <LinearProgress />
+          </div>
           <p className={classes.title}>{product.title}</p>
           <div className={classes.rating}>
             <Rating name="read-only" value={product.rating} readOnly />
