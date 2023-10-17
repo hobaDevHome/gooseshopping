@@ -8,15 +8,41 @@ import HomeAdd from "../components/HomeAdd";
 import ProductSection from "../components/ProductSection";
 import Hero from "../components/Hero";
 import FlashSaleItems from "../components/FlashSaleItems";
+import Grid from "@mui/material/Grid";
+import CircularProgress from "@mui/material/CircularProgress";
 
-const Home = ({ products }) => {
+const Home = ({ products, status }) => {
+  console.log("status", status);
   return (
     <div>
       <Navbar active="Home" />
-      <Hero />
-      <FlashSaleItems products={products.slice(0, 3)} />
 
-      <ProductSection title="Best Seller" list={products.slice(5, 9)} />
+      <Hero />
+      {status === "loading" ? (
+        <Grid
+          item
+          xs={12}
+          padding={1}
+          justifyContent="center"
+          alignItems="center"
+          display="flex"
+          flexDirection="column"
+        >
+          <CircularProgress />
+        </Grid>
+      ) : (
+        <>
+          {products.length > 0 ? (
+            <>
+              <FlashSaleItems products={products.slice(0, 3)} />
+              <ProductSection title="Best Seller" list={products.slice(5, 9)} />
+            </>
+          ) : (
+            <h3>No data yet</h3>
+          )}
+        </>
+      )}
+
       <HomeAdd />
       <Perks />
       <LatestNews />

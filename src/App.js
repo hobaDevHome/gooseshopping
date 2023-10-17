@@ -5,7 +5,6 @@ import "./App.css";
 import Home from "./pages/Home";
 import Contact from "./pages/Contact";
 import Cart from "./pages/Cart";
-import { products } from "./data/data";
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
@@ -33,7 +32,10 @@ function App() {
     <div className="App">
       <ScrollToTop />
       <Routes>
-        <Route index element={<Home products={productsList} />} />
+        <Route
+          index
+          element={<Home products={productsList} status={status} />}
+        />
 
         <Route
           path="/Bags"
