@@ -9,7 +9,7 @@ import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
 import { colors } from "../constants";
 import Typography from "@mui/material/Typography";
-import callpic from "../images/call.png";
+import callpic from "../images/call5.jpg";
 
 import { makeStyles } from "@mui/styles";
 import SearchInput from "../components/SearchInput";
@@ -37,8 +37,10 @@ const useStyles = makeStyles({
 
   image: {
     width: 400,
-    height: 450,
+
     objectFit: "contain",
+
+    borderRadius: 10,
   },
   title: {
     fontSize: 40,
@@ -78,11 +80,11 @@ const useStyles = makeStyles({
   },
   imgdiv: {
     position: "absolute",
-    right: "48%",
+    right: "43%",
     zIndex: 1,
 
     left: -400,
-    top: "10%",
+    top: "20%",
   },
 });
 
