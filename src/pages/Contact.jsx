@@ -222,7 +222,14 @@ const Contact = () => {
           </Grid>
         </Grid>
       </Paper>
-      <Grid item xs={12} md={12} margin={12}>
+      <Grid
+        item
+        container
+        xs={12}
+        md={12}
+        justifyContent="center"
+        marginTop={10}
+      >
         <SearchInput />
       </Grid>
       <Footer />

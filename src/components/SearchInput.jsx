@@ -2,20 +2,15 @@ import TextField from "@mui/material/TextField";
 import { makeStyles } from "@mui/styles";
 import { colors } from "../constants";
 
+import Grid from "@mui/material/Grid";
+
 const useStyles = makeStyles({
   searchInputContainer: {
-    display: "flex",
-    flexDirection: "row",
-    width: "50%",
-    margin: "50px auto",
     borderRadius: 3,
-    borderColor: colors.buttonBlue,
-    borderWidth: 2,
-    borderStyle: "solid",
+    border: `2px solid ${colors.buttonBlue}`,
   },
   searchButton: {
-    width: 120,
-    height: 40,
+    width: "20%",
     color: colors.white,
     padding: "10px 20px",
     backgroundColor: colors.buttonBlue,
@@ -30,15 +25,23 @@ const useStyles = makeStyles({
 const SearchInput = () => {
   const classes = useStyles();
   return (
-    <div className={classes.searchInputContainer}>
-      <TextField
-        fullWidth
-        placeholder="Search query..."
-        sx={{ "& .MuiOutlinedInput-notchedOutline": { border: "none" } }}
-      />
+    <Grid
+      item
+      container
+      xs={8}
+      flexDirection="row"
+      justifyContent="space-between"
+      className={classes.searchInputContainer}
+    >
+      <div>
+        <TextField
+          placeholder="Search .."
+          sx={{ "& .MuiOutlinedInput-notchedOutline": { border: "none" } }}
+        />
+      </div>
 
       <div className={classes.searchButton}>Search</div>
-    </div>
+    </Grid>
   );
 };
 

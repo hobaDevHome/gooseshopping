@@ -48,7 +48,20 @@ const ProductsList = ({ productsList }) => {
       <Grid container item xs={12}>
         {_DATA.currentData().map((product) => {
           return (
-            <Grid item xs={12} md={6} lg={4} padding={1} key={product.id}>
+            <Grid
+              item
+              xs={12}
+              md={6}
+              lg={4}
+              padding={1}
+              key={product.id}
+              sx={{
+                display: "flex",
+
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
               <Link
                 to={`/products/${product.id}`}
                 style={{ textDecoration: "none" }}
@@ -60,7 +73,6 @@ const ProductsList = ({ productsList }) => {
         })}
       </Grid>
       <Grid
-        container
         item
         xs={12}
         padding={1}

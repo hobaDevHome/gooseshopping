@@ -33,15 +33,24 @@ const Category = ({ category, products }) => {
   return (
     <div>
       <Navbar active={`${category[0].toUpperCase() + category.slice(1)}`} />
-      <Grid container marginTop={10}>
-        <Grid container item xs={3}>
+      <Grid container marginTop={{ md: 10, sm: 0 }}>
+        <Grid container item sm={12} md={3}>
           <Filters products={productsList} filterProducts={filterProducts} />
         </Grid>
-        <Grid container item xs={9}>
-          <HomeAdd />
-          {productsList.length > 0 && (
-            <ProductsList productsList={productsList} />
-          )}
+        <Grid container item sm={12} md={9}>
+          <Grid
+            container
+            item
+            xs={12}
+            display={{ xs: "none", sm: "none", md: "flex" }}
+          >
+            <HomeAdd />
+          </Grid>
+          <Grid container item xs={12}>
+            {productsList.length > 0 && (
+              <ProductsList productsList={productsList} />
+            )}
+          </Grid>
         </Grid>
       </Grid>
       <Footer />

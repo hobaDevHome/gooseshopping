@@ -9,6 +9,7 @@ import TabList from "@mui/lab/TabList";
 import TabPanel from "@mui/lab/TabPanel";
 import Button from "@mui/material/Button";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
+import { Link } from "react-router-dom";
 
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import { colors } from "../constants";
@@ -185,20 +186,28 @@ const ProductDetails = ({ products }) => {
       />
       {currentProduct ? (
         <>
-          <Grid container marginTop={5}>
-            <Grid item container xs={12} marginTop={1} marginBottom={4}>
-              <Grid item container xs={5}>
+          <Grid container marginTop={5} padding={2}>
+            <Grid
+              item
+              container
+              sm={12}
+              marginTop={1}
+              marginBottom={4}
+              marginLeft={1}
+            >
+              <Grid item container xs={12} md={5}>
                 <ItemGallery
                   imagesList={currentProduct.imageSrc}
                   category={currentProduct.category}
                   title={currentProduct.title}
                 />
               </Grid>
-              <Grid item container xs={1}></Grid>
+              <Grid item container xs={12} md={1}></Grid>
               <Grid
                 item
                 container
-                xs={6}
+                sm={12}
+                md={6}
                 columnSpacing={1}
                 display={"flex"}
                 flexDirection="column"
@@ -328,6 +337,7 @@ const ProductDetails = ({ products }) => {
                     display: "flex",
                     flexDirection: "row",
                     justifyContent: "space-between",
+                    width: "100%",
                   }}
                 >
                   <div className={classes.quantityContiner}>
@@ -336,6 +346,7 @@ const ProductDetails = ({ products }) => {
                     <div className={classes.addremoveButtonBox}>+</div>
                   </div>
                   <Box
+                    marginRight={2}
                     sx={{
                       backgroundColor: colors.cartBlue,
                       padding: "5px 20px",
@@ -362,8 +373,15 @@ const ProductDetails = ({ products }) => {
               </Grid>
             </Grid>
             <Grid item container xs={12} marginTop={1} marginBottom={4}>
-              <Grid item container xs={6}></Grid>
-              <Grid item container xs={6} columnSpacing={1}>
+              <Grid item container xs={0} md={6}></Grid>
+              <Grid
+                item
+                container
+                xs={12}
+                md={6}
+                columnSpacing={1}
+                marginRight={1}
+              >
                 <Grid item xs={6}>
                   <SocialMediaButton type={"facebook"} />
                 </Grid>
@@ -372,7 +390,7 @@ const ProductDetails = ({ products }) => {
                 </Grid>
               </Grid>
             </Grid>
-            <Grid item container xs={12} marginTop={1}>
+            <Grid item container xs={12} marginLeft={1} marginRight={3}>
               <ProductInfoPanel item={currentProduct} />
             </Grid>
           </Grid>
@@ -383,9 +401,11 @@ const ProductDetails = ({ products }) => {
             <Typography variant="h6" gutterBottom marginTop={5}>
               Sorry, we couldn't find this page
             </Typography>
-            <Button variant="outlined" startIcon={<HomeOutlinedIcon />}>
-              Back to Home
-            </Button>
+            <Link to={`/`} style={{ textDecoration: "none" }}>
+              <Button variant="outlined" startIcon={<HomeOutlinedIcon />}>
+                Back to Home
+              </Button>
+            </Link>
           </div>
         </>
       )}

@@ -49,6 +49,8 @@ function ResponsiveAppBar({ active = "" }) {
         backgroundColor: "#fff",
         paddingTop: 3,
         width: "100%",
+
+        paddingRight: 3,
       }}
     >
       <Toolbar disableGutters>

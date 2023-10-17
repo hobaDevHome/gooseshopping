@@ -6,6 +6,12 @@ import TextField from "@mui/material/TextField";
 import { colors } from "../constants";
 import { cartItems } from "../data/data";
 import Typography from "@mui/material/Typography";
+import Button from "@mui/material/Button";
+import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
+import { Link } from "react-router-dom";
+
+import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
+import FavoriteIcon from "@mui/icons-material/Favorite";
 
 import { makeStyles } from "@mui/styles";
 
@@ -91,212 +97,198 @@ const Cart = () => {
   return (
     <div>
       <Navbar />
-
-      <Grid container marginTop={5}>
-        <Grid
-          container
-          item
-          xs={12}
-          padding={1}
-          display={{ xs: "none", sm: "none", md: "flex" }}
-        >
-          <Grid item sm={6}>
-            PRODUCT
-          </Grid>
-          <Grid item sm={2}>
-            PRICE
-          </Grid>
-          <Grid item sm={2}>
-            QTY
-          </Grid>
-          <Grid item sm={2}>
-            UNIT PRICE
-          </Grid>
-          <Grid container item xs={12} padding={1} marginTop={2}>
-            <div className={classes.divider} />
-          </Grid>
-        </Grid>
-        {cartItems.map((item) => {
-          return (
-            <Grid key={item.id} container item xs={12} padding={1}>
-              <Grid
-                item
-                sm={0}
-                md={0.5}
-                display={{ xs: "none", sm: "none", md: "flex" }}
-              >
-                <div className={classes.deleteButton}>X</div>
-              </Grid>
-              <Grid item sm={2} md={1.5}>
-                <img
-                  src={require(`../images/products/${item.category}/${item.title}/${item.imageSrc[0]}`)}
-                  alt="cartitem"
-                  className={classes.itemImage}
-                />
-              </Grid>
-              <Grid
-                item
-                sm={6}
-                md={4}
-                sx={{ textAlign: "left", flexWrap: "wrap" }}
-              >
-                {item.title}
-              </Grid>
-              <Grid
-                item
-                sm={0}
-                md={2}
-                display={{ xs: "none", sm: "none", md: "flex" }}
-              >
-                ${item.price * item.quantity}
-              </Grid>
-              <Grid item sm={2} md={2} justifyContent={"center"}>
-                <div className={classes.quantityContiner}>
-                  <div className={classes.addremoveButtonBox}>-</div>
-                  <div>{item.quantity}</div>
-                  <div className={classes.addremoveButtonBox}>+</div>
-                </div>
-              </Grid>
-              <Grid item sm={2} md={2}>
-                ${item.price}
-              </Grid>
-            </Grid>
-          );
-        })}
-
-        <Grid item container xs={12} marginTop={3}>
-          <Grid
-            item
-            xs={12}
-            sm={12}
-            md={4}
-            padding={1}
-            justifyContent={"flex-start"}
-            alignSelf={"flex-start"}
-          >
-            <div className={classes.searchInputContainer}>
-              <TextField
-                fullWidth
-                placeholder="Voucher code"
-                sx={{
-                  "& .MuiOutlinedInput-notchedOutline": { border: "none" },
-                }}
-              />
-              <div className={classes.searchButtonContianer}>
-                <div className={classes.blueButton}>Search</div>
-              </div>
-            </div>
-          </Grid>
-          <Grid item xs={12} sm={12} md={4}></Grid>
-          <Grid
-            item
-            container
-            xs={12}
-            sm={12}
-            md={3.8}
-            padding={1}
-            marginRight={1}
-            marginTop={{ sx: 2, md: 0 }}
-          >
+      {cartItems.length > 0 ? (
+        <>
+          <Grid container marginTop={5}>
             <Grid
               container
               item
               xs={12}
-              flexDirection={"column"}
-              alignItems={"end"}
+              padding={1}
+              display={{ xs: "none", sm: "none", md: "flex" }}
             >
-              <div className={classes.checkoutRow}>
-                <Typography
-                  variant="body2"
-                  display="block"
-                  gutterBottom
-                  paddingBottom={{ sm: 1, md: 3 }}
-                  sx={{ textAlign: "left" }}
-                >
-                  Subtotal
-                </Typography>
-                <Typography
-                  variant="body2"
-                  display="block"
-                  gutterBottom
-                  paddingBottom={{ sm: 1, md: 3 }}
-                  sx={{ textAlign: "left" }}
-                >
-                  $998
-                </Typography>
-              </div>
-              <div className={classes.checkoutRow}>
-                <Typography
-                  variant="body2"
-                  display="block"
-                  gutterBottom
-                  paddingBottom={{ sm: 1, md: 3 }}
-                  sx={{ textAlign: "left" }}
-                >
-                  Shipping fee
-                </Typography>
-                <Typography
-                  variant="body2"
-                  display="block"
-                  gutterBottom
-                  paddingBottom={{ sm: 1, md: 3 }}
-                  sx={{ textAlign: "left" }}
-                >
-                  $20
-                </Typography>
-              </div>
-              <div className={classes.checkoutRow}>
-                <Typography
-                  variant="body2"
-                  display="block"
-                  gutterBottom
-                  paddingBottom={{ sm: 1, md: 3 }}
-                  sx={{ textAlign: "left" }}
-                >
-                  Coupon
-                </Typography>
-                <Typography
-                  variant="body2"
-                  display="block"
-                  gutterBottom
-                  paddingBottom={{ sm: 1, md: 3 }}
-                  sx={{ textAlign: "left" }}
-                >
-                  No
-                </Typography>
-              </div>
-              <div className={classes.checkoutRow}>
+              <Grid item sm={6}>
+                PRODUCT
+              </Grid>
+              <Grid item sm={2}>
+                PRICE
+              </Grid>
+              <Grid item sm={2}>
+                QTY
+              </Grid>
+              <Grid item sm={2}>
+                UNIT PRICE
+              </Grid>
+              <Grid container item xs={12} padding={1} marginTop={2}>
                 <div className={classes.divider} />
-              </div>
-              <div className={classes.checkoutRow}>
-                <Typography
-                  variant="h5"
-                  display="block"
-                  gutterBottom
-                  paddingBottom={{ sm: 1, md: 3 }}
-                  sx={{ textAlign: "left" }}
-                >
-                  TOTAL
-                </Typography>
-                <Typography
-                  variant="h5"
-                  display="block"
-                  gutterBottom
-                  paddingBottom={{ sm: 1, md: 3 }}
-                  sx={{ textAlign: "left" }}
-                >
-                  $118
-                </Typography>
-              </div>
-              <div className={classes.checkoutRow}>
-                <div className={classes.blueButton} style={{ height: 60 }}>
-                  Check out
+              </Grid>
+            </Grid>
+            <Grid
+              container
+              item
+              xs={12}
+              display={{ md: "flex", sm: "none", xs: "none" }}
+            >
+              {cartItems.map((item) => {
+                return <CartItemLargeScreens item={item} />;
+              })}
+            </Grid>
+            <Grid
+              container
+              item
+              xs={12}
+              display={{ md: "none", sm: "flex", sx: "flex" }}
+            >
+              {cartItems.map((item) => {
+                return <CartItemMobileScreens item={item} />;
+              })}
+            </Grid>
+            <Grid item container xs={12} marginTop={3}>
+              <Grid
+                item
+                xs={12}
+                sm={12}
+                md={4}
+                padding={1}
+                justifyContent={"flex-start"}
+                alignSelf={"flex-start"}
+              >
+                <div className={classes.searchInputContainer}>
+                  <TextField
+                    fullWidth
+                    placeholder="Voucher code"
+                    sx={{
+                      "& .MuiOutlinedInput-notchedOutline": { border: "none" },
+                    }}
+                  />
+                  <div className={classes.searchButtonContianer}>
+                    <div className={classes.blueButton}>Search</div>
+                  </div>
                 </div>
-              </div>
+              </Grid>
+              <Grid item xs={12} sm={12} md={4}></Grid>
+              <Grid
+                item
+                container
+                xs={12}
+                sm={12}
+                md={3.8}
+                padding={1}
+                marginRight={1}
+                marginTop={{ sx: 2, md: 0 }}
+              >
+                <Grid
+                  container
+                  item
+                  xs={12}
+                  flexDirection={"column"}
+                  alignItems={"end"}
+                >
+                  <div className={classes.checkoutRow}>
+                    <Typography
+                      variant="body2"
+                      display="block"
+                      gutterBottom
+                      paddingBottom={{ sm: 1, md: 3 }}
+                      sx={{ textAlign: "left" }}
+                    >
+                      Subtotal
+                    </Typography>
+                    <Typography
+                      variant="body2"
+                      display="block"
+                      gutterBottom
+                      paddingBottom={{ sm: 1, md: 3 }}
+                      sx={{ textAlign: "left" }}
+                    >
+                      $998
+                    </Typography>
+                  </div>
+                  <div className={classes.checkoutRow}>
+                    <Typography
+                      variant="body2"
+                      display="block"
+                      gutterBottom
+                      paddingBottom={{ sm: 1, md: 3 }}
+                      sx={{ textAlign: "left" }}
+                    >
+                      Shipping fee
+                    </Typography>
+                    <Typography
+                      variant="body2"
+                      display="block"
+                      gutterBottom
+                      paddingBottom={{ sm: 1, md: 3 }}
+                      sx={{ textAlign: "left" }}
+                    >
+                      $20
+                    </Typography>
+                  </div>
+                  <div className={classes.checkoutRow}>
+                    <Typography
+                      variant="body2"
+                      display="block"
+                      gutterBottom
+                      paddingBottom={{ sm: 1, md: 3 }}
+                      sx={{ textAlign: "left" }}
+                    >
+                      Coupon
+                    </Typography>
+                    <Typography
+                      variant="body2"
+                      display="block"
+                      gutterBottom
+                      paddingBottom={{ sm: 1, md: 3 }}
+                      sx={{ textAlign: "left" }}
+                    >
+                      No
+                    </Typography>
+                  </div>
+                  <div className={classes.checkoutRow}>
+                    <div className={classes.divider} />
+                  </div>
+                  <div className={classes.checkoutRow}>
+                    <Typography
+                      variant="h5"
+                      display="block"
+                      gutterBottom
+                      paddingBottom={{ sm: 1, md: 3 }}
+                      sx={{ textAlign: "left" }}
+                    >
+                      TOTAL
+                    </Typography>
+                    <Typography
+                      variant="h5"
+                      display="block"
+                      gutterBottom
+                      paddingBottom={{ sm: 1, md: 3 }}
+                      sx={{ textAlign: "left" }}
+                    >
+                      $118
+                    </Typography>
+                  </div>
+                  <div className={classes.checkoutRow}>
+                    <div className={classes.blueButton} style={{ height: 60 }}>
+                      Check out
+                    </div>
+                  </div>
+                </Grid>
+              </Grid>
             </Grid>
           </Grid>
-        </Grid>
-      </Grid>
+        </>
+      ) : (
+        <div>
+          <Typography variant="h6" gutterBottom marginTop={5}>
+            Your cart is empty
+          </Typography>
+          <Link to={`/`} style={{ textDecoration: "none" }}>
+            <Button variant="outlined" startIcon={<HomeOutlinedIcon />}>
+              Back to Home
+            </Button>
+          </Link>
+        </div>
+      )}
 
       <Footer />
     </div>
@@ -304,3 +296,116 @@ const Cart = () => {
 };
 
 export default Cart;
+
+const CartItemLargeScreens = ({ item }) => {
+  const classes = useStyles();
+  return (
+    <Grid key={item.id} container item xs={12} padding={1}>
+      <Grid item xs={0.5}>
+        <div className={classes.deleteButton}>X</div>
+      </Grid>
+      <Grid item xs={1.5}>
+        <img
+          src={require(`../images/products/${item.category}/${item.title}/${item.imageSrc[0]}`)}
+          alt="cartitem"
+          className={classes.itemImage}
+        />
+      </Grid>
+      <Grid item xs={4} sx={{ textAlign: "left", flexWrap: "wrap" }}>
+        {item.title}
+      </Grid>
+      <Grid item xs={2} sx={{ textAlign: "center" }}>
+        ${item.price * item.quantity}
+      </Grid>
+      <Grid
+        item
+        xs={2}
+        sx={{ justifyContent: "center", alignItems: "start", display: "flex" }}
+      >
+        <div className={classes.quantityContiner}>
+          <div className={classes.addremoveButtonBox}>-</div>
+          <div>{item.quantity}</div>
+          <div className={classes.addremoveButtonBox}>+</div>
+        </div>
+      </Grid>
+      <Grid item xs={2}>
+        ${item.price}
+      </Grid>
+    </Grid>
+  );
+};
+
+const CartItemMobileScreens = ({ item }) => {
+  const classes = useStyles();
+  return (
+    <Grid
+      key={item.id}
+      container
+      item
+      xs={12}
+      padding={2}
+      sx={{ border: `1px solid #EBF0FF` }}
+      borderRadius={4}
+      margin={3}
+    >
+      <Grid item xs={3}>
+        <img
+          src={require(`../images/products/${item.category}/${item.title}/${item.imageSrc[0]}`)}
+          alt="cartitem"
+          className={classes.itemImage}
+        />
+      </Grid>
+      <Grid item container xs={9} paddingLeft={1}>
+        <Grid item container xs={12} justifyContent="space-between">
+          <Grid
+            item
+            xs={10}
+            sx={{
+              textAlign: "left",
+              flexWrap: "wrap",
+              color: colors.titleBlue,
+              fontSize: 18,
+              fontWeight: "bold",
+            }}
+          >
+            {item.title}
+          </Grid>
+          <Grid item xs={2}>
+            <DeleteOutlineOutlinedIcon
+              style={{ color: "#9098B1", fontSize: 36 }}
+            />
+          </Grid>
+        </Grid>
+
+        <Grid item container xs={12} marginTop={2}>
+          <Grid
+            item
+            xs={6}
+            sx={{
+              textAlign: "left",
+              color: colors.buttonBlue,
+              fontWeight: "bold",
+            }}
+          >
+            ${item.price}
+          </Grid>
+          <Grid
+            item
+            xs={6}
+            sx={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "end",
+            }}
+          >
+            <div className={classes.quantityContiner}>
+              <div className={classes.addremoveButtonBox}>-</div>
+              <div>{item.quantity}</div>
+              <div className={classes.addremoveButtonBox}>+</div>
+            </div>
+          </Grid>
+        </Grid>
+      </Grid>
+    </Grid>
+  );
+};
