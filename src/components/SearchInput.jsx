@@ -29,6 +29,8 @@ const SearchInput = () => {
       item
       container
       xs={8}
+      margin={"0 auto"}
+      marginTop={8}
       flexDirection="row"
       justifyContent="space-between"
       className={classes.searchInputContainer}
