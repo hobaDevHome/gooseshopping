@@ -17,6 +17,8 @@ import {
 import ProductDetails from "./pages/ProductDetails";
 import Category from "./pages/Category";
 import ScrollToTop from "./components/ScrollToTop";
+import SignIn from "./pages/SignIn";
+import SignUp from "./pages/SingUp";
 
 function App() {
   const dispatch = useDispatch();
@@ -32,6 +34,9 @@ function App() {
     <div className="App">
       <ScrollToTop />
       <Routes>
+        <Route path="/singin" element={<SignIn />} />
+        <Route path="/singup" element={<SignUp />} />
+
         <Route
           index
           element={<Home products={productsList} status={status} />}

@@ -17,4 +17,5 @@ export const colors = {
   ligthPink: "#fff7f8",
   darkPink: "#FF4252",
   cartBlue: "#ebf6ff",
+  greyText: "#9098B1",
 };

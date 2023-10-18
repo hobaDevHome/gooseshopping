@@ -11,7 +11,6 @@ import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import { Link } from "react-router-dom";
 
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
-import FavoriteIcon from "@mui/icons-material/Favorite";
 
 import { makeStyles } from "@mui/styles";
 
