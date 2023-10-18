@@ -6,13 +6,13 @@ import { getAuth } from "firebase/auth";
 let key = process.env.REACT_APP_API_KEY;
 
 const firebaseConfig = {
-  apiKey: key,
+  apiKey: "AIzaSyCoRf0nn5q8EH8oSRC0MGHH3kkwqFoT6Og",
   authDomain: "sarhan-redux.firebaseapp.com",
   databaseURL: "https://sarhan-redux-default-rtdb.firebaseio.com",
   projectId: "sarhan-redux",
   storageBucket: "sarhan-redux.appspot.com",
   messagingSenderId: "93036002516",
-  appId: "1:93036002516:web:08fc612209930c77358f41",
+  appId: "1:93036002516:web:f8da8011ed0cc492358f41",
 };
 
 // Initialize Firebase

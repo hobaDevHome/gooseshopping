@@ -66,10 +66,6 @@ const SignUp = () => {
   const singup = async (e) => {
     e.preventDefault();
     setLodaing(true);
-    const metadata = {
-      contentType: "image/jpeg",
-    };
-
     try {
       const userCredential = await createUserWithEmailAndPassword(
         auth,
@@ -77,42 +73,46 @@ const SignUp = () => {
         password
       );
       const user = userCredential.user;
+      await setDoc(doc(db, "users", user.uid), {
+        uid: user.uid,
+        displayName: username,
+        email,
+      });
 
-      //   await setDoc(doc(db, "users", user.uid), {
-      //     uid: user.uid,
-      //     displayName: username,
-      //     email,
-      //   });
+      // const storageRef = ref(storage, `avatrs/${Date.now() + "_" + username}`);
 
-      const storageRef = ref(storage, `avatars/${Date.now() + username}.jpg`);
+      // uploadBytes(storageRef, file).then((value) => {
+      //   console.log(value);
+      // });
 
-      const uploadTask = uploadBytes(storageRef, file, metadata);
+      // const uploadTask = uploadBytesResumable(storageRef, file).then(
+      //   (value) => {
+      //     console.log(value);
+      //   }
+      // );
 
-      //   const uploadTask = uploadBytesResumable(storageRef, file, metadata);
-      //   uploadTask.on(
-      //     (error) => {
-      //       console.log(error);
-      //       toast.error(error.message);
-      //     },
-      //     () => {
-      //       getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
-      //         // await updateProfile(user, {
-      //         //   displayName: username,
-      //         //   photoURL: downloadURL,
-      //         // });
-
-      //         await setDoc(doc(db, "users", user.uid), {
-      //           uid: user.uid,
-      //           displayName: username,
-      //           email,
-      //           photoURL: downloadURL,
-      //         });
+      // uploadTask.on(
+      //   (error) => {
+      //     console.log(error);
+      //   },
+      //   () => {
+      //     getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
+      //       await updateProfile(user, {
+      //         displayName: username,
+      //         photoURL: downloadURL,
       //       });
-      //     }
-      //   );
+
+      //       await setDoc(doc(db, "users", user.uid), {
+      //         uid: user.uid,
+      //         displayName: username,
+      //         email,
+      //         photoURL: downloadURL || "",
+      //       });
+      //     });
+      //   }
+      // );
     } catch (error) {
       console.log(error);
-      toast.error("something went wrong");
     }
   };
   console.log(file);
@@ -174,20 +174,20 @@ const SignUp = () => {
             }}
           />
         </Grid>
-        <Grid
+        {/* <Grid
           item
           xs={12}
           justifyContent="center"
           alignItems="center"
           marginBottom={2}
         >
-          <label>avatar file: </label>
+          <label>Avatar file: </label>
           <input
             type="file"
-            onChange={(e) => setFile(e.target.value)}
+            onChange={(e) => setFile(e.target.files[0])}
             style={{ backgroundColor: colors.white }}
           />
-        </Grid>
+        </Grid> */}
 
         <Grid item xs={12} justifyContent="center" alignItems="center">
           <div className={classes.blueButton} onClick={singup}>
