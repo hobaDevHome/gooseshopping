@@ -23,6 +23,8 @@ import useAuth from "../hooks/useAuth";
 
 import { colors } from "../constants";
 import Logo from "../images/goos_logo.png";
+import Guest from "../images/guest.png";
+import User from "../images/user.jpg";
 
 const pages = ["Home", "Bags", "Sneakers", "Belts", "Contact"];
 
@@ -47,12 +49,12 @@ function ResponsiveAppBar({ active = "" }) {
     }
   }, [active]);
 
-  useEffect(() => {
-    if (currentUser) {
-      setLoginName(currentUser.displayName);
-      console.log(currentUser.displayName);
-    }
-  }, [currentUser]);
+  // useEffect(() => {
+  //   if (currentUser) {
+  //     setLoginName(currentUser.displayName);
+  //     console.log(currentUser.displayName);
+  //   }
+  // }, [currentUser]);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -62,9 +64,12 @@ function ResponsiveAppBar({ active = "" }) {
     setAnchorElNav(null);
   };
 
-  const handleClose = () => {
-    setAnchorEl(null);
-    signout();
+  const handSingInOut = () => {
+    if (currentUser) {
+      signout();
+    } else {
+      navigate("/singin");
+    }
   };
 
   const signout = () => {
@@ -150,40 +155,57 @@ function ResponsiveAppBar({ active = "" }) {
                   style={{ color: colors.textBlack, marginLeft: 5 }}
                 />
               </Link>
-              <div>
-                <Button
-                  id="basic-button"
-                  aria-controls={open ? "login" : undefined}
-                  aria-haspopup="true"
-                  aria-expanded={open ? "true" : undefined}
-                  onClick={handleClick}
+
+              {currentUser ? (
+                <div
                   style={{
-                    width: 50,
-                    height: 50,
-                    borderRadius: 25,
-                    backgroundColor: colors.buttonBlue,
-                    color: colors.white,
-                    fontWeight: "bold",
                     display: "flex",
-                    justifyContent: "center",
+                    flexDirection: "row",
+                    color: colors.buttonBlue,
                     alignItems: "center",
-                    marginLeft: 10,
                   }}
                 >
-                  {currentUser.displayName ? currentUser.displayName : ""}
-                </Button>
-                <Menu
-                  id="login"
-                  anchorEl={anchorEl}
-                  open={open}
-                  onClose={handleClose}
-                  MenuListProps={{
-                    "aria-labelledby": "login-menu",
+                  <img
+                    src={User}
+                    alt=""
+                    style={{
+                      width: 50,
+                      height: 50,
+                      objectFit: "contain",
+                      display: "block",
+                      padding: 10,
+                    }}
+                  />
+                  {/* {currentUser.displayName} */}
+                  <p style={{ cursor: "pointer" }} onClick={handSingInOut}>
+                    Log Out
+                  </p>
+                </div>
+              ) : (
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "row",
+                    color: colors.buttonBlue,
+                    alignItems: "center",
                   }}
                 >
-                  <MenuItem onClick={handleClose}>Sign Out</MenuItem>
-                </Menu>
-              </div>
+                  <img
+                    src={Guest}
+                    alt=""
+                    style={{
+                      width: 50,
+                      height: 50,
+                      objectFit: "contain",
+                      display: "block",
+                      padding: 10,
+                    }}
+                  />
+                  <p style={{ cursor: "pointer" }} onClick={handSingInOut}>
+                    Log In
+                  </p>
+                </div>
+              )}
             </Box>
           </Grid>
         </Grid>
@@ -234,18 +256,21 @@ function ResponsiveAppBar({ active = "" }) {
                   </MenuItem>
                 </Link>
               ))}
+              <div style={{ color: colors.buttonBlue, marginLeft: 20 }}>
+                {currentUser ? (
+                  <>
+                    <p style={{ cursor: "pointer" }} onClick={handSingInOut}>
+                      {currentUser.displayName}
+                      Log Out
+                    </p>
+                  </>
+                ) : (
+                  <p style={{ cursor: "pointer" }} onClick={handSingInOut}>
+                    Log In
+                  </p>
+                )}
+              </div>
             </Menu>
-            <div
-              style={{
-                width: 70,
-                height: 70,
-                borderRadius: 35,
-                backgroundColor: colors.buttonBlue,
-                color: colors.white,
-              }}
-            >
-              {currentUser.displayName}
-            </div>
           </div>
 
           <Link to="/">

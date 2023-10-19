@@ -21,6 +21,8 @@ import { colors } from "../constants";
 
 import goose from "../images/goose-loog.jpg";
 
+import Logo from "../images/goos_logo.png";
+
 import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
 import MailOutlinedIcon from "@mui/icons-material/MailOutlined";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
@@ -33,7 +35,12 @@ toastConfig({ theme: "info" });
 
 const useStyles = makeStyles({
   image: {
-    width: "60%",
+    width: "40%",
+    height: "auto",
+    objectFit: "contain",
+  },
+  logo: {
+    width: "40%",
     height: "auto",
     objectFit: "contain",
   },
@@ -135,9 +142,14 @@ const SignUp = () => {
         <Grid item xs={12} justifyContent="center" alignItems="center">
           <img src={goose} alt="logo" className={classes.image} />
         </Grid>
+        <Grid item xs={12} justifyContent="center" alignItems="center">
+          <img src={Logo} alt="logo" className={classes.logo} />
+        </Grid>
 
         <Grid item xs={12} justifyContent="center" alignItems="center">
-          <p style={{ color: colors.greyText }}>Create an new account</p>
+          <p style={{ color: colors.greyText, fontSize: 20 }}>
+            Create an new account
+          </p>
         </Grid>
         <Grid item xs={12}>
           {loadaing && <CircularProgress />}

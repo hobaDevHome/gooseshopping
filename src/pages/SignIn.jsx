@@ -11,17 +11,24 @@ import goose from "../images/goose-loog.jpg";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 
-import { auth, db } from "../firebase-config";
+import { auth } from "../firebase-config";
 import MailOutlinedIcon from "@mui/icons-material/MailOutlined";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import InputAdornment from "@mui/material/InputAdornment";
 import CircularProgress from "@mui/material/CircularProgress";
 
+import Logo from "../images/goos_logo.png";
+
 import { makeStyles } from "@mui/styles";
 
 const useStyles = makeStyles({
   image: {
-    width: "60%",
+    width: "40%",
+    height: "auto",
+    objectFit: "contain",
+  },
+  logo: {
+    width: "40%",
     height: "auto",
     objectFit: "contain",
   },
@@ -80,7 +87,13 @@ const SignIn = () => {
           <img src={goose} alt="logo" className={classes.image} />
         </Grid>
         <Grid item xs={12} justifyContent="center" alignItems="center">
-          <p style={{ color: colors.greyText }}>Log to your account</p>
+          <img src={Logo} alt="logo" className={classes.logo} />
+        </Grid>
+
+        <Grid item xs={12} justifyContent="center" alignItems="center">
+          <p style={{ color: colors.greyText, fontSize: 20 }}>
+            Log to your account
+          </p>
         </Grid>
         <Grid item xs={12}>
           {loadaing && <CircularProgress />}
