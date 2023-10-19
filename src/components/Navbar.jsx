@@ -18,6 +18,7 @@ import Button from "@mui/material/Button";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 import useAuth from "../hooks/useAuth";
 
@@ -56,16 +57,13 @@ function ResponsiveAppBar({ active = "" }) {
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [loginName, setLoginName] = useState("");
   const [loginImgUrl, setLoginImgUrl] = useState("");
-  const [anchorEl, setAnchorEl] = React.useState(null);
 
   const classes = useStyles();
-  const open = Boolean(anchorEl);
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const { currentUser } = useAuth();
   const navigate = useNavigate();
+  const { currentUser } = useAuth();
+
+  const totalQuality = useSelector((state) => state.cart.totalQuantity);
+  console.log("totoa", totalQuality);
 
   useEffect(() => {
     if (active) {
@@ -185,7 +183,7 @@ function ResponsiveAppBar({ active = "" }) {
                       marginRight: 5,
                     }}
                   />
-                  <div className={classes.cartItemsPadge}>4</div>
+                  <div className={classes.cartItemsPadge}>{totalQuality}</div>
                 </div>
               </Link>
 
@@ -291,6 +289,16 @@ function ResponsiveAppBar({ active = "" }) {
                 </Link>
               ))}
               <div style={{ color: colors.buttonBlue, marginLeft: 20 }}>
+                <Link to="/cart" style={{ textDecoration: "none" }}>
+                  <p
+                    style={{ cursor: "pointer", fontWeight: "bold" }}
+                    onClick={handSingInOut}
+                  >
+                    Cart
+                  </p>
+                </Link>
+              </div>
+              <div style={{ color: colors.buttonBlue, marginLeft: 20 }}>
                 {currentUser ? (
                   <>
                     <p style={{ cursor: "pointer" }} onClick={handSingInOut}>
@@ -303,13 +311,6 @@ function ResponsiveAppBar({ active = "" }) {
                     Log In
                   </p>
                 )}
-              </div>
-              <div style={{ color: colors.buttonBlue, marginLeft: 20 }}>
-                <Link to="/cart" style={{ textDecoration: "none" }}>
-                  <p style={{ cursor: "pointer" }} onClick={handSingInOut}>
-                    Cart
-                  </p>
-                </Link>
               </div>
             </Menu>
           </div>

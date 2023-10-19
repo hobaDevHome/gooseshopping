@@ -4,6 +4,7 @@ import { db } from "../../firebase-config";
 import { collection, getDocs } from "firebase/firestore";
 
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { act } from "react-dom/test-utils";
 
 const initialState = {
   cartItems: [],
@@ -41,27 +42,34 @@ const cartSlice = createSlice({
           title: newItem.title,
           imageSrc: newItem.imageSrc,
           price: newItem.price,
-          quantity: newItem.quantity,
+          quantity: 1,
           totalPrice: newItem.price,
         });
       } else {
         existingItem.quantity++;
-        existingItem.totalAmount =
+        existingItem.totalPrice =
           Number(existingItem.totalPrice) + Number(newItem.price);
       }
       state.totalAmount = state.cartItems.reduce(
-        (total, item) => total + Number(item.price) * Number(item.quantity)
+        (total, item) => total + Number(item.price) * Number(item.quantity),
+        0
       );
-      console.log(state.totalQuantity);
-      console.log(newItem);
+    },
+
+    deleteItem: (state, action) => {
+      const id = action.payload;
+      const existingItem = state.cartItems.find((item) => item.id === id);
+      if (existingItem) {
+        state.cartItems = state.cartItems.filter((item) => item.id !== id);
+        state.totalQuantity = state.totalQuantity - existingItem.quantity;
+      }
+      state.totalAmount = state.cartItems.reduce(
+        (total, item) => total + Number(item.price) * Number(item.quantity),
+        0
+      );
     },
   },
 });
 
 export default cartSlice.reducer;
 export const cartActions = cartSlice.actions;
-
-// Selectors
-export const selectCartItems = (state) => state.cart.products;
-export const selectStatus = (state) => state.cart.status;
-export const selectError = (state) => state.cart.error;

@@ -1,14 +1,18 @@
+// @ts-nocheck
 import React from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
 import { colors } from "../constants";
-import { cartItems } from "../data/data";
+import { toast } from "react-toastify";
+// import { cartItems } from "../data/data";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import { Link } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { cartActions } from "../redux/slice/cartSlice";
 
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 
@@ -64,6 +68,7 @@ const useStyles = makeStyles({
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
+    cursor: "pointer",
   },
   itemImage: {
     width: 80,
@@ -93,6 +98,11 @@ const useStyles = makeStyles({
 
 const Cart = () => {
   const classes = useStyles();
+  const cartItems = useSelector((state) => state.cart.cartItems);
+  const totalAmount = useSelector((state) => state.cart.totalAmount);
+
+  console.log("cartitems", cartItems);
+
   return (
     <div>
       <Navbar />
@@ -129,7 +139,7 @@ const Cart = () => {
               display={{ md: "flex", sm: "none", xs: "none" }}
             >
               {cartItems.map((item) => {
-                return <CartItemLargeScreens item={item} />;
+                return <CartItemLargeScreens item={item} key={item.id} />;
               })}
             </Grid>
             <Grid
@@ -139,7 +149,7 @@ const Cart = () => {
               display={{ md: "none", sm: "flex", sx: "flex" }}
             >
               {cartItems.map((item) => {
-                return <CartItemMobileScreens item={item} />;
+                return <CartItemMobileScreens item={item} key={item.id} />;
               })}
             </Grid>
             <Grid item container xs={12} marginTop={3}>
@@ -200,7 +210,7 @@ const Cart = () => {
                       paddingBottom={{ sm: 1, md: 3 }}
                       sx={{ textAlign: "left" }}
                     >
-                      $998
+                      ${totalAmount}
                     </Typography>
                   </div>
                   <div className={classes.checkoutRow}>
@@ -263,7 +273,7 @@ const Cart = () => {
                       paddingBottom={{ sm: 1, md: 3 }}
                       sx={{ textAlign: "left" }}
                     >
-                      $118
+                      ${totalAmount - 20}
                     </Typography>
                   </div>
                   <div className={classes.checkoutRow}>
@@ -298,14 +308,24 @@ export default Cart;
 
 const CartItemLargeScreens = ({ item }) => {
   const classes = useStyles();
+  const dispatch = useDispatch();
+
+  const deleteFromCart = () => {
+    dispatch(cartActions.deleteItem(item.id));
+
+    toast.success("Product deleted from cart");
+  };
+
   return (
     <Grid key={item.id} container item xs={12} padding={1}>
       <Grid item xs={0.5}>
-        <div className={classes.deleteButton}>X</div>
+        <div onClick={deleteFromCart} className={classes.deleteButton}>
+          X
+        </div>
       </Grid>
       <Grid item xs={1.5}>
         <img
-          src={require(`../images/products/${item.category}/${item.title}/${item.imageSrc[0]}`)}
+          src={item.imageSrc[0]}
           alt="cartitem"
           className={classes.itemImage}
         />
@@ -314,7 +334,7 @@ const CartItemLargeScreens = ({ item }) => {
         {item.title}
       </Grid>
       <Grid item xs={2} sx={{ textAlign: "center" }}>
-        ${item.price * item.quantity}
+        ${item.totalPrice}
       </Grid>
       <Grid
         item
@@ -349,7 +369,7 @@ const CartItemMobileScreens = ({ item }) => {
     >
       <Grid item xs={3}>
         <img
-          src={require(`../images/products/${item.category}/${item.title}/${item.imageSrc[0]}`)}
+          src={item.imageSrc[0]}
           alt="cartitem"
           className={classes.itemImage}
         />

@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React, { useState } from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
@@ -108,13 +109,13 @@ const useStyles = makeStyles({
     marginLeft: "100px",
   },
   colorButton: {
-    width: 28,
-    height: 28,
-    borderRadius: 14,
-    marginRight: 15,
-    marginTop: 10,
-    transition: "0.3s",
-    cursor: "pointer",
+    "width": 28,
+    "height": 28,
+    "borderRadius": 14,
+    "marginRight": 15,
+    "marginTop": 10,
+    "transition": "0.3s",
+    "cursor": "pointer",
     "&:hover": {
       transform: "scale(1.4)",
     },
@@ -368,16 +369,16 @@ const ProductDetails = ({ products }) => {
                     marginRight={2}
                     onClick={addToCart}
                     sx={{
-                      backgroundColor: colors.cartBlue,
-                      padding: "5px 20px",
-                      borderRadius: 2,
-                      display: "flex",
-                      flexDirection: "row",
-                      color: colors.mainBlue,
-                      alignItems: "center",
-                      height: "50px",
-                      cursor: "pointer",
-                      transition: "0.3s",
+                      "backgroundColor": colors.cartBlue,
+                      "padding": "5px 20px",
+                      "borderRadius": 2,
+                      "display": "flex",
+                      "flexDirection": "row",
+                      "color": colors.mainBlue,
+                      "alignItems": "center",
+                      "height": "50px",
+                      "cursor": "pointer",
+                      "transition": "0.3s",
 
                       "&:hover": {
                         transform: "scale(1.2)",
@@ -528,14 +529,14 @@ const SocialMediaButton = ({ type }) => {
   return (
     <Box
       sx={{
-        backgroundColor: "GrayText",
-        padding: "10px 20px",
-        borderRadius: 1,
-        color: colors.white,
-        justifyContent: "center",
-        alignItems: "center",
-        transition: "all 0.4s ease 0s",
-        cursor: "pointer",
+        "backgroundColor": "GrayText",
+        "padding": "10px 20px",
+        "borderRadius": 1,
+        "color": colors.white,
+        "justifyContent": "center",
+        "alignItems": "center",
+        "transition": "all 0.4s ease 0s",
+        "cursor": "pointer",
 
         "&:hover": {
           backgroundColor: bgColor,

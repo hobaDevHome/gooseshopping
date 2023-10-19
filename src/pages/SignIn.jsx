@@ -158,7 +158,7 @@ const SignIn = () => {
             <span
               style={{
                 fontWeight: "bold",
-                color: colors.darkPink,
+                color: "green",
                 cursor: "pointer",
                 marginLeft: 10,
                 fontSize: 20,
