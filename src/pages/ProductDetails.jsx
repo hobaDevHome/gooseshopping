@@ -10,6 +10,10 @@ import TabPanel from "@mui/lab/TabPanel";
 import Button from "@mui/material/Button";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import { Link } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { cartActions } from "../redux/slice/cartSlice";
+
+import { toast } from "react-toastify";
 
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import { colors } from "../constants";
@@ -165,6 +169,8 @@ const ProductDetails = ({ products }) => {
   const classes = useStyles();
   let { id } = useParams();
 
+  const dispatch = useDispatch();
+
   let currentProduct = products.find((e) => e.id === id);
 
   const handleChange = (event) => {
@@ -175,6 +181,19 @@ const ProductDetails = ({ products }) => {
     currentProduct.price -
       (currentProduct.price * currentProduct.discount) / 100
   );
+
+  const addToCart = () => {
+    dispatch(
+      cartActions.addItem({
+        id: currentProduct.id,
+        title: currentProduct.title,
+        imageSrc: currentProduct.imageSrc,
+        price: currentProduct.price,
+      })
+    );
+
+    toast.success("Product added to cart");
+  };
 
   return (
     <div>
@@ -347,6 +366,7 @@ const ProductDetails = ({ products }) => {
                   </div>
                   <Box
                     marginRight={2}
+                    onClick={addToCart}
                     sx={{
                       backgroundColor: colors.cartBlue,
                       padding: "5px 20px",

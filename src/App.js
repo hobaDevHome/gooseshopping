@@ -11,7 +11,6 @@ import {
   fetchProducts,
   selectProducts,
   selectStatus,
-  selectError,
 } from "./redux/slice/productsSlice";
 
 import ProductDetails from "./pages/ProductDetails";
@@ -24,7 +23,6 @@ function App() {
   const dispatch = useDispatch();
   const productsList = useSelector(selectProducts);
   const status = useSelector(selectStatus);
-  const error = useSelector(selectError);
 
   useEffect(() => {
     dispatch(fetchProducts());
