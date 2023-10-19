@@ -153,6 +153,21 @@ const SignIn = () => {
             </Link>
           </p>
         </Grid>
+        <Grid item xs={12} justifyContent="center" alignItems="center">
+          <Link to={`/`} style={{ textDecoration: "none" }}>
+            <span
+              style={{
+                fontWeight: "bold",
+                color: colors.darkPink,
+                cursor: "pointer",
+                marginLeft: 10,
+                fontSize: 20,
+              }}
+            >
+              Login as a guest
+            </span>
+          </Link>
+        </Grid>
         <Grid item xs={12} justifyContent="center" alignItems="center"></Grid>
       </Grid>
     </Grid>

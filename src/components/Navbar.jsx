@@ -32,6 +32,7 @@ function ResponsiveAppBar({ active = "" }) {
   const [selected, setselected] = useState(0);
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [loginName, setLoginName] = useState("");
+  const [loginImgUrl, setLoginImgUrl] = useState("");
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -49,12 +50,12 @@ function ResponsiveAppBar({ active = "" }) {
     }
   }, [active]);
 
-  // useEffect(() => {
-  //   if (currentUser) {
-  //     setLoginName(currentUser.displayName);
-  //     console.log(currentUser.displayName);
-  //   }
-  // }, [currentUser]);
+  useEffect(() => {
+    if (currentUser) {
+      setLoginName(currentUser.displayName);
+      setLoginImgUrl(currentUser.photoURL);
+    }
+  }, [currentUser]);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -166,11 +167,12 @@ function ResponsiveAppBar({ active = "" }) {
                   }}
                 >
                   <img
-                    src={User}
+                    src={loginImgUrl}
                     alt=""
                     style={{
                       width: 50,
                       height: 50,
+                      borderRadius: 50,
                       objectFit: "contain",
                       display: "block",
                       padding: 10,

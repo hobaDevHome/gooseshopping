@@ -86,48 +86,53 @@ const SignUp = () => {
         password
       );
       const user = userCredential.user;
-      await updateProfile(user, {
-        displayName: username,
-      });
 
-      await setDoc(doc(db, "users", user.uid), {
-        uid: user.uid,
-        displayName: username,
-        email,
-      });
+      if (file) {
+        const storageRef = ref(
+          storage,
+          `avatars/${Date.now() + "_" + username}`
+        );
 
-      // const storageRef = ref(storage, `avatrs/${Date.now() + "_" + username}`);
+        const uploadTask = uploadBytesResumable(storageRef, file);
 
-      // uploadBytes(storageRef, file).then((value) => {
-      //   console.log(value);
-      // });
+        uploadTask.on(
+          "state_changed",
+          (snapshot) => {
+            console.log("Upload is in progress");
+          },
+          (error) => {
+            console.log("uploadtasek error", error);
+          },
+          () => {
+            console.log("success");
 
-      // const uploadTask = uploadBytesResumable(storageRef, file).then(
-      //   (value) => {
-      //     console.log(value);
-      //   }
-      // );
+            getDownloadURL(uploadTask.snapshot.ref).then(
+              async (downloadURL) => {
+                await updateProfile(user, {
+                  displayName: username,
+                  photoURL: downloadURL,
+                });
 
-      // uploadTask.on(
-      //   (error) => {
-      //     console.log(error);
-      //   },
-      //   () => {
-      //     getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
-      //       await updateProfile(user, {
-      //         displayName: username,
-      //         photoURL: downloadURL,
-      //       });
-
-      //       await setDoc(doc(db, "users", user.uid), {
-      //         uid: user.uid,
-      //         displayName: username,
-      //         email,
-      //         photoURL: downloadURL || "",
-      //       });
-      //     });
-      //   }
-      // );
+                await setDoc(doc(db, "users", user.uid), {
+                  uid: user.uid,
+                  displayName: username,
+                  email,
+                  photoURL: downloadURL || "",
+                });
+              }
+            );
+          }
+        );
+      } else {
+        await updateProfile(user, {
+          displayName: username,
+        });
+        await setDoc(doc(db, "users", user.uid), {
+          uid: user.uid,
+          displayName: username,
+          email,
+        });
+      }
       setLoadaing(false);
       navigate("/singin");
     } catch (error) {
@@ -202,7 +207,7 @@ const SignUp = () => {
             }}
           />
         </Grid>
-        {/* <Grid
+        <Grid
           item
           xs={12}
           justifyContent="center"
@@ -215,7 +220,7 @@ const SignUp = () => {
             onChange={(e) => setFile(e.target.files[0])}
             style={{ backgroundColor: colors.white }}
           />
-        </Grid> */}
+        </Grid>
 
         <Grid item xs={12} justifyContent="center" alignItems="center">
           <div className={classes.blueButton} onClick={singup}>
