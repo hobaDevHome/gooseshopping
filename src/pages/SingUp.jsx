@@ -2,6 +2,8 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+import toast, { toastConfig } from "react-simple-toasts";
+import "react-simple-toasts/dist/theme/info.css"; // choose your theme
 import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
@@ -13,7 +15,6 @@ import {
   uploadBytes,
 } from "@firebase/storage";
 import { auth, storage, db } from "../firebase-config";
-import { toast } from "react-toastify";
 
 import { Link } from "react-router-dom";
 import { colors } from "../constants";
@@ -24,8 +25,11 @@ import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined
 import MailOutlinedIcon from "@mui/icons-material/MailOutlined";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import InputAdornment from "@mui/material/InputAdornment";
+import CircularProgress from "@mui/material/CircularProgress";
 
 import { makeStyles } from "@mui/styles";
+
+toastConfig({ theme: "info" });
 
 const useStyles = makeStyles({
   image: {
@@ -61,11 +65,13 @@ const SignUp = () => {
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const [file, setFile] = useState(null);
-  const [lodaing, setLodaing] = useState(false);
+  const [loadaing, setLoadaing] = useState(false);
+
+  const navigate = useNavigate();
 
   const singup = async (e) => {
     e.preventDefault();
-    setLodaing(true);
+    setLoadaing(true);
     try {
       const userCredential = await createUserWithEmailAndPassword(
         auth,
@@ -73,6 +79,10 @@ const SignUp = () => {
         password
       );
       const user = userCredential.user;
+      await updateProfile(user, {
+        displayName: username,
+      });
+
       await setDoc(doc(db, "users", user.uid), {
         uid: user.uid,
         displayName: username,
@@ -111,11 +121,14 @@ const SignUp = () => {
       //     });
       //   }
       // );
+      setLoadaing(false);
+      navigate("/singin");
     } catch (error) {
       console.log(error);
+      setLoadaing(false);
     }
   };
-  console.log(file);
+
   return (
     <Grid container className={classes.rightContainer}>
       <Grid item xs={12} md={6} sx={{ margin: "10px auto" }} padding={3}>
@@ -125,6 +138,9 @@ const SignUp = () => {
 
         <Grid item xs={12} justifyContent="center" alignItems="center">
           <p style={{ color: colors.greyText }}>Create an new account</p>
+        </Grid>
+        <Grid item xs={12}>
+          {loadaing && <CircularProgress />}
         </Grid>
         <Grid item xs={12} justifyContent="center" alignItems="center">
           <TextField

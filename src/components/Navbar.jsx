@@ -1,31 +1,44 @@
+// @ts-nocheck
 import * as React from "react";
 import { useState, useEffect } from "react";
-import AppBar from "@mui/material/AppBar";
+import { signOut } from "firebase/auth";
+import { auth } from "../firebase-config";
+import { useNavigate } from "react-router-dom";
 
+import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
+import MenuItem from "@mui/material/MenuItem";
+import Grid from "@mui/material/Grid";
+import Button from "@mui/material/Button";
+import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 
 import { Link } from "react-router-dom";
-import Grid from "@mui/material/Grid";
 
-import Button from "@mui/material/Button";
+import useAuth from "../hooks/useAuth";
 
-import MenuItem from "@mui/material/MenuItem";
 import { colors } from "../constants";
-
 import Logo from "../images/goos_logo.png";
-import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 
 const pages = ["Home", "Bags", "Sneakers", "Belts", "Contact"];
 
 function ResponsiveAppBar({ active = "" }) {
   const [selected, setselected] = useState(0);
-
   const [anchorElNav, setAnchorElNav] = useState(null);
+  const [loginName, setLoginName] = useState("");
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const { currentUser } = useAuth();
+  const navigate = useNavigate();
+
   useEffect(() => {
     if (active) {
       setselected(pages.findIndex((e) => e === active));
@@ -34,12 +47,34 @@ function ResponsiveAppBar({ active = "" }) {
     }
   }, [active]);
 
+  useEffect(() => {
+    if (currentUser) {
+      setLoginName(currentUser.displayName);
+      console.log(currentUser.displayName);
+    }
+  }, [currentUser]);
+
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
 
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+    signout();
+  };
+
+  const signout = () => {
+    signOut(auth)
+      .then(() => {
+        navigate("/singin");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   return (
@@ -115,6 +150,40 @@ function ResponsiveAppBar({ active = "" }) {
                   style={{ color: colors.textBlack, marginLeft: 5 }}
                 />
               </Link>
+              <div>
+                <Button
+                  id="basic-button"
+                  aria-controls={open ? "login" : undefined}
+                  aria-haspopup="true"
+                  aria-expanded={open ? "true" : undefined}
+                  onClick={handleClick}
+                  style={{
+                    width: 50,
+                    height: 50,
+                    borderRadius: 25,
+                    backgroundColor: colors.buttonBlue,
+                    color: colors.white,
+                    fontWeight: "bold",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    marginLeft: 10,
+                  }}
+                >
+                  {currentUser.displayName ? currentUser.displayName : ""}
+                </Button>
+                <Menu
+                  id="login"
+                  anchorEl={anchorEl}
+                  open={open}
+                  onClose={handleClose}
+                  MenuListProps={{
+                    "aria-labelledby": "login-menu",
+                  }}
+                >
+                  <MenuItem onClick={handleClose}>Sign Out</MenuItem>
+                </Menu>
+              </div>
             </Box>
           </Grid>
         </Grid>
@@ -166,6 +235,17 @@ function ResponsiveAppBar({ active = "" }) {
                 </Link>
               ))}
             </Menu>
+            <div
+              style={{
+                width: 70,
+                height: 70,
+                borderRadius: 35,
+                backgroundColor: colors.buttonBlue,
+                color: colors.white,
+              }}
+            >
+              {currentUser.displayName}
+            </div>
           </div>
 
           <Link to="/">

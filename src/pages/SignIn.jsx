@@ -8,10 +8,14 @@ import { Link } from "react-router-dom";
 import { colors } from "../constants";
 import goose from "../images/goose-loog.jpg";
 
-import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
+
+import { auth, db } from "../firebase-config";
 import MailOutlinedIcon from "@mui/icons-material/MailOutlined";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import InputAdornment from "@mui/material/InputAdornment";
+import CircularProgress from "@mui/material/CircularProgress";
 
 import { makeStyles } from "@mui/styles";
 
@@ -46,7 +50,28 @@ const useStyles = makeStyles({
 const SignIn = () => {
   const [email, setemail] = useState("");
   const [password, setPassword] = useState("");
+  const [loadaing, setLoadaing] = useState(false);
   const classes = useStyles();
+  const navigate = useNavigate();
+
+  const singin = async (e) => {
+    e.preventDefault();
+    setLoadaing(true);
+    try {
+      const userCredential = await signInWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      const user = userCredential.user;
+
+      setLoadaing(false);
+      navigate("/");
+    } catch (error) {
+      console.log(error);
+      setLoadaing(false);
+    }
+  };
 
   return (
     <Grid container className={classes.rightContainer}>
@@ -56,6 +81,9 @@ const SignIn = () => {
         </Grid>
         <Grid item xs={12} justifyContent="center" alignItems="center">
           <p style={{ color: colors.greyText }}>Log to your account</p>
+        </Grid>
+        <Grid item xs={12}>
+          {loadaing && <CircularProgress />}
         </Grid>
         <Grid item xs={12} justifyContent="center" alignItems="center">
           <TextField
@@ -91,7 +119,9 @@ const SignIn = () => {
         </Grid>
 
         <Grid item xs={12} justifyContent="center" alignItems="center">
-          <div className={classes.blueButton}>Sign In</div>
+          <div onClick={singin} className={classes.blueButton}>
+            Sign In
+          </div>
         </Grid>
         <Grid item xs={12} justifyContent="center" alignItems="center">
           <p style={{ color: colors.greyText }}>

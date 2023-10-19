@@ -6,7 +6,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
-import Select, { SelectChangeEvent } from "@mui/material/Select";
+import Select from "@mui/material/Select";
 
 import { colors } from "../constants";
 
@@ -43,13 +43,13 @@ const useStyles = makeStyles({
     flexWrap: "wrap",
   },
   colorButton: {
-    width: 28,
-    height: 28,
-    borderRadius: 14,
-    marginRight: 15,
-    marginTop: 10,
-    transition: "0.3s",
-    cursor: "pointer",
+    "width": 28,
+    "height": 28,
+    "borderRadius": 14,
+    "marginRight": 15,
+    "marginTop": 10,
+    "transition": "0.3s",
+    "cursor": "pointer",
     "&:hover": {
       transform: "scale(1.2)",
     },
@@ -74,11 +74,9 @@ const Filters = ({ products, filterProducts }) => {
 
   useEffect(() => {
     if (brand) {
-      console.log("brand in use effect", brand);
       filterProducts("brand", brand);
     }
     if (color) {
-      console.log("color in use effect", color);
       filterProducts("color", color);
     }
   }, [brand, filterProducts, color]);

@@ -12,7 +12,6 @@ import Grid from "@mui/material/Grid";
 import CircularProgress from "@mui/material/CircularProgress";
 
 const Home = ({ products, status }) => {
-  console.log("status", status);
   return (
     <div>
       <Navbar active="Home" />
