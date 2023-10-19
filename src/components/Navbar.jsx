@@ -24,9 +24,32 @@ import useAuth from "../hooks/useAuth";
 import { colors } from "../constants";
 import Logo from "../images/goos_logo.png";
 import Guest from "../images/guest.png";
-import User from "../images/user.jpg";
+
+import { makeStyles } from "@mui/styles";
 
 const pages = ["Home", "Bags", "Sneakers", "Belts", "Contact"];
+
+const useStyles = makeStyles({
+  shoppingcartdiv: {
+    position: "relative",
+  },
+  cartItemsPadge: {
+    width: 16,
+    height: 16,
+    borderRadius: 8,
+    backgroundColor: "red",
+    border: "1px solid red",
+    position: "absolute",
+    color: colors.white,
+    fontWeight: "bold",
+    left: 20,
+    top: -10,
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    fontSize: 12,
+  },
+});
 
 function ResponsiveAppBar({ active = "" }) {
   const [selected, setselected] = useState(0);
@@ -34,6 +57,8 @@ function ResponsiveAppBar({ active = "" }) {
   const [loginName, setLoginName] = useState("");
   const [loginImgUrl, setLoginImgUrl] = useState("");
   const [anchorEl, setAnchorEl] = React.useState(null);
+
+  const classes = useStyles();
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -91,7 +116,7 @@ function ResponsiveAppBar({ active = "" }) {
         paddingTop: 3,
         width: "100%",
 
-        paddingRight: 3,
+        paddingRight: 0,
       }}
     >
       <Toolbar disableGutters>
@@ -125,7 +150,7 @@ function ResponsiveAppBar({ active = "" }) {
                 flexDirection: "row",
                 alignSelf: "end",
                 justifySelf: "end",
-                marginRight: 5,
+                marginRight: 2,
                 alignItems: "center",
               }}
             >
@@ -143,7 +168,7 @@ function ResponsiveAppBar({ active = "" }) {
                         selected === index ? colors.mainBlue : colors.textBlack
                       }`,
                       display: "block",
-                      marginLeft: 5,
+                      marginRight: 2,
                       fontWeight: "bold",
                     }}
                   >
@@ -151,10 +176,17 @@ function ResponsiveAppBar({ active = "" }) {
                   </Button>
                 </Link>
               ))}
-              <Link to="/Cart">
-                <ShoppingCartOutlinedIcon
-                  style={{ color: colors.textBlack, marginLeft: 5 }}
-                />
+              <Link to="/Cart" style={{ textDecoration: "none" }}>
+                <div className={classes.shoppingcartdiv}>
+                  <ShoppingCartOutlinedIcon
+                    style={{
+                      color: colors.textBlack,
+                      marginLeft: 5,
+                      marginRight: 5,
+                    }}
+                  />
+                  <div className={classes.cartItemsPadge}>4</div>
+                </div>
               </Link>
 
               {currentUser ? (
@@ -170,15 +202,15 @@ function ResponsiveAppBar({ active = "" }) {
                     src={loginImgUrl}
                     alt=""
                     style={{
-                      width: 50,
-                      height: 50,
-                      borderRadius: 50,
+                      width: 40,
+                      height: 40,
+                      borderRadius: 40,
                       objectFit: "contain",
                       display: "block",
                       padding: 10,
                     }}
                   />
-                  {/* {currentUser.displayName} */}
+
                   <p style={{ cursor: "pointer" }} onClick={handSingInOut}>
                     Log Out
                   </p>
@@ -196,8 +228,8 @@ function ResponsiveAppBar({ active = "" }) {
                     src={Guest}
                     alt=""
                     style={{
-                      width: 50,
-                      height: 50,
+                      width: 40,
+                      height: 40,
                       objectFit: "contain",
                       display: "block",
                       padding: 10,
@@ -271,6 +303,13 @@ function ResponsiveAppBar({ active = "" }) {
                     Log In
                   </p>
                 )}
+              </div>
+              <div style={{ color: colors.buttonBlue, marginLeft: 20 }}>
+                <Link to="/cart" style={{ textDecoration: "none" }}>
+                  <p style={{ cursor: "pointer" }} onClick={handSingInOut}>
+                    Cart
+                  </p>
+                </Link>
               </div>
             </Menu>
           </div>
