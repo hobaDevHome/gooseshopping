@@ -173,6 +173,9 @@ const ProductDetails = ({ products }) => {
   const dispatch = useDispatch();
 
   let currentProduct = products.find((e) => e.id === id);
+  const cartItems = useSelector((state) => state.cart.cartItems);
+  const currentItemInCart = cartItems.find((e) => e.id === id);
+  console.log("currentItemInCart", currentItemInCart);
 
   const handleChange = (event) => {
     setSize(event.target.value);
@@ -194,6 +197,12 @@ const ProductDetails = ({ products }) => {
     );
 
     toast.success("Product added to cart");
+  };
+  const removeFromCart = () => {
+    if (currentItemInCart) {
+      dispatch(cartActions.decreaseItemQuantity(currentItemInCart));
+      toast.success("Product removed from cart");
+    }
   };
 
   return (
@@ -361,9 +370,21 @@ const ProductDetails = ({ products }) => {
                   }}
                 >
                   <div className={classes.quantityContiner}>
-                    <div className={classes.addremoveButtonBox}>-</div>
-                    <div>7</div>
-                    <div className={classes.addremoveButtonBox}>+</div>
+                    <div
+                      onClick={removeFromCart}
+                      className={classes.addremoveButtonBox}
+                    >
+                      -
+                    </div>
+                    <div>
+                      {currentItemInCart ? currentItemInCart.quantity : 0}
+                    </div>
+                    <div
+                      onClick={addToCart}
+                      className={classes.addremoveButtonBox}
+                    >
+                      +
+                    </div>
                   </div>
                   <Box
                     marginRight={2}

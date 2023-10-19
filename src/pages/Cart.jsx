@@ -100,8 +100,7 @@ const Cart = () => {
   const classes = useStyles();
   const cartItems = useSelector((state) => state.cart.cartItems);
   const totalAmount = useSelector((state) => state.cart.totalAmount);
-
-  console.log("cartitems", cartItems);
+  const dispatch = useDispatch();
 
   return (
     <div>
@@ -315,6 +314,24 @@ const CartItemLargeScreens = ({ item }) => {
 
     toast.success("Product deleted from cart");
   };
+  const addToCart = () => {
+    dispatch(
+      cartActions.addItem({
+        id: item.id,
+        title: item.title,
+        imageSrc: item.imageSrc,
+        price: item.price,
+      })
+    );
+
+    toast.success("Product added to cart");
+  };
+  const removeFromCart = () => {
+    if (item) {
+      dispatch(cartActions.decreaseItemQuantity(item));
+      toast.success("Product removed from cart");
+    }
+  };
 
   return (
     <Grid key={item.id} container item xs={12} padding={1}>
@@ -342,9 +359,13 @@ const CartItemLargeScreens = ({ item }) => {
         sx={{ justifyContent: "center", alignItems: "start", display: "flex" }}
       >
         <div className={classes.quantityContiner}>
-          <div className={classes.addremoveButtonBox}>-</div>
+          <div onClick={removeFromCart} className={classes.addremoveButtonBox}>
+            -
+          </div>
           <div>{item.quantity}</div>
-          <div className={classes.addremoveButtonBox}>+</div>
+          <div onClick={addToCart} className={classes.addremoveButtonBox}>
+            +
+          </div>
         </div>
       </Grid>
       <Grid item xs={2}>
@@ -356,6 +377,31 @@ const CartItemLargeScreens = ({ item }) => {
 
 const CartItemMobileScreens = ({ item }) => {
   const classes = useStyles();
+  const dispatch = useDispatch();
+
+  const deleteFromCart = () => {
+    dispatch(cartActions.deleteItem(item.id));
+
+    toast.success("Product deleted from cart");
+  };
+  const addToCart = () => {
+    dispatch(
+      cartActions.addItem({
+        id: item.id,
+        title: item.title,
+        imageSrc: item.imageSrc,
+        price: item.price,
+      })
+    );
+
+    toast.success("Product added to cart");
+  };
+  const removeFromCart = () => {
+    if (item) {
+      dispatch(cartActions.decreaseItemQuantity(item));
+      toast.success("Product removed from cart");
+    }
+  };
   return (
     <Grid
       key={item.id}
@@ -418,9 +464,16 @@ const CartItemMobileScreens = ({ item }) => {
             }}
           >
             <div className={classes.quantityContiner}>
-              <div className={classes.addremoveButtonBox}>-</div>
+              <div
+                onClick={removeFromCart}
+                className={classes.addremoveButtonBox}
+              >
+                -
+              </div>
               <div>{item.quantity}</div>
-              <div className={classes.addremoveButtonBox}>+</div>
+              <div onClick={addToCart} className={classes.addremoveButtonBox}>
+                +
+              </div>
             </div>
           </Grid>
         </Grid>
