@@ -1,28 +1,15 @@
 // @ts-nocheck
-
 import { db } from "../../firebase-config";
-import { collection, getDocs } from "firebase/firestore";
+import { collection, getDocs, setDoc, doc } from "firebase/firestore";
+import { createAsyncThunk } from "@reduxjs/toolkit";
 
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   cartItems: [],
   totalAmount: 0,
   totalQuantity: 0,
 };
-
-export const getCartItems = createAsyncThunk(
-  "cartitems/getCartItems",
-
-  async () => {
-    const response = await getDocs(collection(db, "cart"));
-    return {
-      list: response.docs.map((data) => {
-        return { ...data.data(), id: data.id };
-      }),
-    };
-  }
-);
 
 const cartSlice = createSlice({
   name: "cart",
@@ -34,7 +21,6 @@ const cartSlice = createSlice({
         (item) => item.id === newItem.id
       );
       state.totalQuantity++;
-
       if (!existingItem) {
         state.cartItems.push({
           id: newItem.id,

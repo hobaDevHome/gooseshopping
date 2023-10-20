@@ -169,22 +169,24 @@ const ProductDetails = ({ products }) => {
   const [size, setSize] = useState("");
   const classes = useStyles();
   let { id } = useParams();
-
   const dispatch = useDispatch();
 
   let currentProduct = products.find((e) => e.id === id);
   const cartItems = useSelector((state) => state.cart.cartItems);
-  const currentItemInCart = cartItems.find((e) => e.id === id);
-  console.log("currentItemInCart", currentItemInCart);
 
+  const currentItemInCart = cartItems
+    ? cartItems.find((e) => e.id === id)
+    : null;
+
+  let newPrice = currentItemInCart
+    ? Math.floor(
+        currentItemInCart.price -
+          (currentItemInCart.price * currentProduct.discount) / 100
+      )
+    : 0;
   const handleChange = (event) => {
     setSize(event.target.value);
   };
-
-  let newPrice = Math.floor(
-    currentProduct.price -
-      (currentProduct.price * currentProduct.discount) / 100
-  );
 
   const addToCart = () => {
     dispatch(
@@ -205,12 +207,15 @@ const ProductDetails = ({ products }) => {
     }
   };
 
+  console.log("incart", currentItemInCart);
   return (
     <div>
       <Navbar
         active={
-          currentProduct.category[0].toUpperCase() +
-          currentProduct.category.slice(1)
+          currentProduct
+            ? currentProduct.category[0].toUpperCase() +
+              currentProduct.category.slice(1)
+            : ""
         }
       />
       {currentProduct ? (

@@ -63,7 +63,6 @@ function ResponsiveAppBar({ active = "" }) {
   const { currentUser } = useAuth();
 
   const totalQuality = useSelector((state) => state.cart.totalQuantity);
-  console.log("totoa", totalQuality);
 
   useEffect(() => {
     if (active) {
