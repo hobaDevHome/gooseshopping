@@ -43,6 +43,7 @@ export default function PaymentForm() {
       await setDoc(doc(db, "purchaseHistory", `purchase${Date.now()}`), {
         userid: currentUser.uid,
         date: Date.now(),
+        username: currentUser.displayName,
         items: cartItems,
       });
     } catch (error) {

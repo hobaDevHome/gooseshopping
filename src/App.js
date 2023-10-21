@@ -20,6 +20,7 @@ import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SingUp";
 import Checkout from "./pages/Checkout";
 import PaymentCompleted from "./pages/PaymentCompleted";
+import ProtectedRout from "./pages/ProtectedRout";
 
 function App() {
   const dispatch = useDispatch();
@@ -55,7 +56,14 @@ function App() {
           element={<Category category="sneakers" products={productsList} />}
         />
         <Route path="/cart" element={<Cart />} />
-        <Route path="/chechout" element={<Checkout />} />
+        <Route
+          path="/chechout"
+          element={
+            <ProtectedRout>
+              <Checkout />
+            </ProtectedRout>
+          }
+        />
         <Route path="/Contact" element={<Contact />} />
         <Route path="/paymentcompleted" element={<PaymentCompleted />} />
         <Route

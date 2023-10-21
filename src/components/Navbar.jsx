@@ -25,6 +25,8 @@ import useAuth from "../hooks/useAuth";
 import { colors } from "../constants";
 import Logo from "../images/goos_logo.png";
 import Guest from "../images/guest.png";
+import { cartActions } from "../redux/slice/cartSlice";
+import { useDispatch } from "react-redux";
 
 import { makeStyles } from "@mui/styles";
 
@@ -57,7 +59,7 @@ function ResponsiveAppBar({ active = "" }) {
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [loginName, setLoginName] = useState("");
   const [loginImgUrl, setLoginImgUrl] = useState("");
-
+  const dispatch = useDispatch();
   const classes = useStyles();
   const navigate = useNavigate();
   const { currentUser } = useAuth();
@@ -90,6 +92,7 @@ function ResponsiveAppBar({ active = "" }) {
   const handSingInOut = () => {
     if (currentUser) {
       signout();
+      dispatch(cartActions.resetCart());
     } else {
       navigate("/singin");
     }

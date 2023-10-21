@@ -6,7 +6,7 @@ import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
 import { colors } from "../constants";
 import { toast } from "react-toastify";
-// import { cartItems } from "../data/data";
+import useAtuh from "../hooks/useAuth";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
@@ -102,6 +102,7 @@ const Cart = () => {
   const cartItems = useSelector((state) => state.cart.cartItems);
   const totalAmount = useSelector((state) => state.cart.totalAmount);
   const dispatch = useDispatch();
+  const { currentUser } = useAtuh();
 
   return (
     <div>
@@ -282,7 +283,9 @@ const Cart = () => {
                         to={`/chechout`}
                         style={{ textDecoration: "none", color: colors.white }}
                       >
-                        <p>Check out</p>
+                        <p onClick={() => console.log("user", currentUser)}>
+                          Check out
+                        </p>
                       </Link>
                     </div>
                   </div>
