@@ -1,22 +1,22 @@
 // @ts-nocheck
 import React from "react";
+import { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import Grid from "@mui/material/Grid";
-import TextField from "@mui/material/TextField";
+
 import { colors } from "../constants";
 import { toast } from "react-toastify";
-// import { cartItems } from "../data/data";
+
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { cartActions } from "../redux/slice/cartSlice";
-
-import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 
 import { makeStyles } from "@mui/styles";
+
+import StripeContainer from "../components/StripeContainer";
 
 const useStyles = makeStyles({
   searchInputContainer: {
@@ -73,7 +73,7 @@ const useStyles = makeStyles({
   itemImage: {
     width: 80,
     height: "auto",
-
+    borderRadius: 3,
     objectFit: "contain",
   },
   quantityContiner: {
@@ -97,11 +97,13 @@ const useStyles = makeStyles({
   },
 });
 
-const Cart = () => {
+const Checkout = () => {
   const classes = useStyles();
   const cartItems = useSelector((state) => state.cart.cartItems);
   const totalAmount = useSelector((state) => state.cart.totalAmount);
   const dispatch = useDispatch();
+
+  const [showItem, setShowItem] = useState(false);
 
   return (
     <div>
@@ -155,36 +157,14 @@ const Cart = () => {
             <Grid item container xs={12} marginTop={3}>
               <Grid
                 item
-                xs={12}
-                sm={12}
-                md={4}
-                padding={1}
-                justifyContent={"flex-start"}
-                alignSelf={"flex-start"}
-              >
-                <div className={classes.searchInputContainer}>
-                  <TextField
-                    fullWidth
-                    placeholder="Voucher code"
-                    sx={{
-                      "& .MuiOutlinedInput-notchedOutline": { border: "none" },
-                    }}
-                  />
-                  <div className={classes.searchButtonContianer}>
-                    <div className={classes.blueButton}>Search</div>
-                  </div>
-                </div>
-              </Grid>
-              <Grid item xs={12} sm={12} md={4}></Grid>
-              <Grid
-                item
                 container
                 xs={12}
                 sm={12}
-                md={3.8}
+                md={6}
                 padding={1}
                 marginRight={1}
                 marginTop={{ sx: 2, md: 0 }}
+                sx={{ margin: "0 auto" }}
               >
                 <Grid
                   container
@@ -193,69 +173,6 @@ const Cart = () => {
                   flexDirection={"column"}
                   alignItems={"end"}
                 >
-                  <div className={classes.checkoutRow}>
-                    <Typography
-                      variant="body2"
-                      display="block"
-                      gutterBottom
-                      paddingBottom={{ sm: 1, md: 3 }}
-                      sx={{ textAlign: "left" }}
-                    >
-                      Subtotal
-                    </Typography>
-                    <Typography
-                      variant="body2"
-                      display="block"
-                      gutterBottom
-                      paddingBottom={{ sm: 1, md: 3 }}
-                      sx={{ textAlign: "left" }}
-                    >
-                      ${totalAmount}
-                    </Typography>
-                  </div>
-                  <div className={classes.checkoutRow}>
-                    <Typography
-                      variant="body2"
-                      display="block"
-                      gutterBottom
-                      paddingBottom={{ sm: 1, md: 3 }}
-                      sx={{ textAlign: "left" }}
-                    >
-                      Shipping fee
-                    </Typography>
-                    <Typography
-                      variant="body2"
-                      display="block"
-                      gutterBottom
-                      paddingBottom={{ sm: 1, md: 3 }}
-                      sx={{ textAlign: "left" }}
-                    >
-                      $20
-                    </Typography>
-                  </div>
-                  <div className={classes.checkoutRow}>
-                    <Typography
-                      variant="body2"
-                      display="block"
-                      gutterBottom
-                      paddingBottom={{ sm: 1, md: 3 }}
-                      sx={{ textAlign: "left" }}
-                    >
-                      Coupon
-                    </Typography>
-                    <Typography
-                      variant="body2"
-                      display="block"
-                      gutterBottom
-                      paddingBottom={{ sm: 1, md: 3 }}
-                      sx={{ textAlign: "left" }}
-                    >
-                      No
-                    </Typography>
-                  </div>
-                  <div className={classes.checkoutRow}>
-                    <div className={classes.divider} />
-                  </div>
                   <div className={classes.checkoutRow}>
                     <Typography
                       variant="h5"
@@ -276,16 +193,15 @@ const Cart = () => {
                       ${totalAmount - 20}
                     </Typography>
                   </div>
-                  <div className={classes.checkoutRow}>
-                    <div className={classes.blueButton} style={{ height: 60 }}>
-                      <Link
-                        to={`/chechout`}
-                        style={{ textDecoration: "none", color: colors.white }}
-                      >
-                        <p>Check out</p>
-                      </Link>
-                    </div>
-                  </div>
+                </Grid>
+                <Grid
+                  container
+                  item
+                  xs={12}
+                  flexDirection={"column"}
+                  sx={{ border: "none" }}
+                >
+                  <StripeContainer />
                 </Grid>
               </Grid>
             </Grid>
@@ -309,43 +225,15 @@ const Cart = () => {
   );
 };
 
-export default Cart;
+export default Checkout;
 
 const CartItemLargeScreens = ({ item }) => {
   const classes = useStyles();
   const dispatch = useDispatch();
 
-  const deleteFromCart = () => {
-    dispatch(cartActions.deleteItem(item.id));
-
-    toast.success("Product deleted from cart");
-  };
-  const addToCart = () => {
-    dispatch(
-      cartActions.addItem({
-        id: item.id,
-        title: item.title,
-        imageSrc: item.imageSrc,
-        price: item.price,
-      })
-    );
-
-    toast.success("Product added to cart");
-  };
-  const removeFromCart = () => {
-    if (item) {
-      dispatch(cartActions.decreaseItemQuantity(item));
-      toast.success("Product removed from cart");
-    }
-  };
-
   return (
     <Grid key={item.id} container item xs={12} padding={1}>
-      <Grid item xs={0.5}>
-        <div onClick={deleteFromCart} className={classes.deleteButton}>
-          X
-        </div>
-      </Grid>
+      <Grid item xs={0.5}></Grid>
       <Grid item xs={1.5}>
         <img
           src={item.imageSrc[0]}
@@ -364,15 +252,7 @@ const CartItemLargeScreens = ({ item }) => {
         xs={2}
         sx={{ justifyContent: "center", alignItems: "start", display: "flex" }}
       >
-        <div className={classes.quantityContiner}>
-          <div onClick={removeFromCart} className={classes.addremoveButtonBox}>
-            -
-          </div>
-          <div>{item.quantity}</div>
-          <div onClick={addToCart} className={classes.addremoveButtonBox}>
-            +
-          </div>
-        </div>
+        <div>{item.quantity}</div>
       </Grid>
       <Grid item xs={2}>
         ${item.price}
@@ -385,29 +265,6 @@ const CartItemMobileScreens = ({ item }) => {
   const classes = useStyles();
   const dispatch = useDispatch();
 
-  const deleteFromCart = () => {
-    dispatch(cartActions.deleteItem(item.id));
-
-    toast.success("Product deleted from cart");
-  };
-  const addToCart = () => {
-    dispatch(
-      cartActions.addItem({
-        id: item.id,
-        title: item.title,
-        imageSrc: item.imageSrc,
-        price: item.price,
-      })
-    );
-
-    toast.success("Product added to cart");
-  };
-  const removeFromCart = () => {
-    if (item) {
-      dispatch(cartActions.decreaseItemQuantity(item));
-      toast.success("Product removed from cart");
-    }
-  };
   return (
     <Grid
       key={item.id}
@@ -441,11 +298,7 @@ const CartItemMobileScreens = ({ item }) => {
           >
             {item.title}
           </Grid>
-          <Grid item xs={2} onClick={deleteFromCart}>
-            <DeleteOutlineOutlinedIcon
-              style={{ color: "#9098B1", fontSize: 36, cursor: "pointer" }}
-            />
-          </Grid>
+          <Grid item xs={2}></Grid>
         </Grid>
 
         <Grid item container xs={12} marginTop={2}>
@@ -470,16 +323,7 @@ const CartItemMobileScreens = ({ item }) => {
             }}
           >
             <div className={classes.quantityContiner}>
-              <div
-                onClick={removeFromCart}
-                className={classes.addremoveButtonBox}
-              >
-                -
-              </div>
               <div>{item.quantity}</div>
-              <div onClick={addToCart} className={classes.addremoveButtonBox}>
-                +
-              </div>
             </div>
           </Grid>
         </Grid>

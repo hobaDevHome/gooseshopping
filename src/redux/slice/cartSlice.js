@@ -1,8 +1,4 @@
 // @ts-nocheck
-import { db } from "../../firebase-config";
-import { collection, getDocs, setDoc, doc } from "firebase/firestore";
-import { createAsyncThunk } from "@reduxjs/toolkit";
-
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {

@@ -18,6 +18,7 @@ import Category from "./pages/Category";
 import ScrollToTop from "./components/ScrollToTop";
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SingUp";
+import Checkout from "./pages/Checkout";
 
 function App() {
   const dispatch = useDispatch();
@@ -53,6 +54,7 @@ function App() {
           element={<Category category="sneakers" products={productsList} />}
         />
         <Route path="/cart" element={<Cart />} />
+        <Route path="/chechout" element={<Checkout />} />
         <Route path="/Contact" element={<Contact />} />
         <Route
           path="/products/:id"
