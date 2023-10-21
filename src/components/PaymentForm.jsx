@@ -2,6 +2,12 @@
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import axios from "axios";
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { cartActions } from "../redux/slice/cartSlice";
+import { useSelector, useDispatch } from "react-redux";
+import useAuth from "../hooks/useAuth";
+import { doc, setDoc } from "firebase/firestore";
+import { db } from "../firebase-config";
 
 const CARD_OPTIONS = {
   iconStyle: "solid",
@@ -27,6 +33,23 @@ export default function PaymentForm() {
   const [success, setSuccess] = useState(false);
   const stripe = useStripe();
   const elements = useElements();
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { currentUser } = useAuth();
+  const cartItems = useSelector((state) => state.cart.cartItems);
+
+  const addPurshaseToFirebase = async () => {
+    try {
+      await setDoc(doc(db, "purchaseHistory", `purchase${Date.now()}`), {
+        userid: currentUser.uid,
+        date: Date.now(),
+        items: cartItems,
+      });
+    } catch (error) {
+      console.log("firebase error", error);
+    }
+    dispatch(cartActions.resetCart());
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -46,6 +69,8 @@ export default function PaymentForm() {
         if (response.data.success) {
           console.log("Successful payment");
           setSuccess(true);
+          navigate("/paymentcompleted");
+          addPurshaseToFirebase();
         }
       } catch (error) {
         console.log("Error", error);
