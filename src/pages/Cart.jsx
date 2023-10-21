@@ -1,12 +1,12 @@
 // @ts-nocheck
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
 import { colors } from "../constants";
 import { toast } from "react-toastify";
-import useAtuh from "../hooks/useAuth";
+
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
@@ -17,6 +17,7 @@ import { cartActions } from "../redux/slice/cartSlice";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 
 import { makeStyles } from "@mui/styles";
+import PurchaseHistory from "./History";
 
 const useStyles = makeStyles({
   searchInputContainer: {
@@ -101,8 +102,6 @@ const Cart = () => {
   const classes = useStyles();
   const cartItems = useSelector((state) => state.cart.cartItems);
   const totalAmount = useSelector((state) => state.cart.totalAmount);
-  const dispatch = useDispatch();
-  const { currentUser } = useAtuh();
 
   return (
     <div>
@@ -283,9 +282,7 @@ const Cart = () => {
                         to={`/chechout`}
                         style={{ textDecoration: "none", color: colors.white }}
                       >
-                        <p onClick={() => console.log("user", currentUser)}>
-                          Check out
-                        </p>
+                        <p>Check out</p>
                       </Link>
                     </div>
                   </div>
@@ -306,6 +303,7 @@ const Cart = () => {
           </Link>
         </div>
       )}
+      <PurchaseHistory />
 
       <Footer />
     </div>

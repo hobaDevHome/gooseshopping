@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { cartActions } from "../redux/slice/cartSlice";
 import { useSelector, useDispatch } from "react-redux";
 import useAuth from "../hooks/useAuth";
-import { doc, setDoc } from "firebase/firestore";
+import { doc, setDoc, collection, addDoc } from "firebase/firestore";
 import { db } from "../firebase-config";
 
 const CARD_OPTIONS = {
@@ -40,7 +40,8 @@ export default function PaymentForm() {
 
   const addPurshaseToFirebase = async () => {
     try {
-      await setDoc(doc(db, "purchaseHistory", `purchase${Date.now()}`), {
+      const colRef = collection(db, "purchaseHistory");
+      await addDoc(colRef, {
         userid: currentUser.uid,
         date: Date.now(),
         username: currentUser.displayName,
