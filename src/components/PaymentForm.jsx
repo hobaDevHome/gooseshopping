@@ -51,6 +51,7 @@ export default function PaymentForm() {
       console.log("firebase error", error);
     }
     dispatch(cartActions.resetCart());
+    localStorage.setItem("items", "[]");
   };
 
   const handleSubmit = async (e) => {

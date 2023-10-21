@@ -103,6 +103,11 @@ const Cart = () => {
   const cartItems = useSelector((state) => state.cart.cartItems);
   const totalAmount = useSelector((state) => state.cart.totalAmount);
 
+  useEffect(() => {
+    console.log("items changed");
+    localStorage.setItem("items", JSON.stringify(cartItems));
+  }, [cartItems]);
+
   return (
     <div>
       <Navbar />

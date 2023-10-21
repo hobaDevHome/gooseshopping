@@ -92,7 +92,7 @@ function ResponsiveAppBar({ active = "" }) {
   const handSingInOut = () => {
     if (currentUser) {
       signout();
-      dispatch(cartActions.resetCart());
+      // dispatch(cartActions.resetCart());
     } else {
       navigate("/singin");
     }

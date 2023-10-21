@@ -1,10 +1,25 @@
 // @ts-nocheck
 import { createSlice } from "@reduxjs/toolkit";
 
+const storedCartItems = JSON.parse(localStorage.getItem("items") || "[]");
+let storedTotalAmount = 0;
+let storedTotalQuantit = 0;
+if (storedCartItems) {
+  storedTotalAmount = storedCartItems.reduce(
+    (total, item) => total + Number(item.price) * Number(item.quantity),
+    0
+  );
+  storedTotalQuantit = storedCartItems.reduce(
+    (total, item) => total + Number(item.quantity),
+    0
+  );
+}
+console.log("in slice", storedCartItems, storedTotalAmount, storedTotalQuantit);
+
 const initialState = {
-  cartItems: [],
-  totalAmount: 0,
-  totalQuantity: 0,
+  cartItems: storedCartItems ? storedCartItems : [],
+  totalAmount: storedTotalAmount,
+  storedTotalQuantit: storedTotalQuantit,
 };
 
 const cartSlice = createSlice({

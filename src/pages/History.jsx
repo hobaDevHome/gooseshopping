@@ -60,7 +60,6 @@ const PurchaseHistory = () => {
     list = historyList.filter((e) => e.userid === currentUser.uid);
   }
 
-  console.log("list ", list);
   return (
     <div>
       <Grid container marginTop={5}>

@@ -1,5 +1,5 @@
 // @ts-nocheck
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import Grid from "@mui/material/Grid";
@@ -173,6 +173,11 @@ const ProductDetails = ({ products }) => {
 
   let currentProduct = products.find((e) => e.id === id);
   const cartItems = useSelector((state) => state.cart.cartItems);
+
+  useEffect(() => {
+    console.log("items changed");
+    localStorage.setItem("items", JSON.stringify(cartItems));
+  }, [cartItems]);
 
   const currentItemInCart = cartItems
     ? cartItems.find((e) => e.id === id)
